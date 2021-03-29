@@ -13,9 +13,9 @@ function App() {
 			<BrowserRouter>
 				<Header />
 				<Switch>
-					<Route exact path={'/'} component={Home} />
+					<Route exact path={'/pouf-co'} component={Home} />
 					<Route
-						path={'/product/:productId'}
+						path={'/pouf-co/product/:productId'}
 						component={ProductDetailsContainer}
 					/>
 				</Switch>
