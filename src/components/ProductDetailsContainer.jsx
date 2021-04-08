@@ -1,17 +1,17 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
+import { useParams } from 'react-router';
 import { Context } from '../store';
 import { ProductDetails } from './ProductDetails';
 
 export const ProductDetailsContainer = ({ match }) => {
-	const {
-		params: { productId },
-	} = match;
+	// const {
+	// 	params: { productId },
+	// } = match;
+	let { productId } = useParams();
+	const { products } = useContext(Context).state;
+	const product = products.filter((elem) => elem.id === productId)[0];
+	console.log(product);
+	// const [loading, setLoading] = useState(true);
 
-	const { state, dispatch } = useContext(Context);
-	const [productData, setProductData] = useState(
-		state.products.filter((elem) => elem.id === productId)[0]
-	);
-	const [loading, setLoading] = useState(true);
-
-	return <ProductDetails productData={productData} />;
+	return <ProductDetails product={product} />;
 };

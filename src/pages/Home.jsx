@@ -1,11 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Products } from '../components/Products';
 import { ProductsContainer } from '../components/ProductsContainer';
 
 export const Home = () => {
 	return (
-		<main id='home-page'>
-			<ProductsContainer />
+		<main id='home-page' className='p-4'>
+			<Link to='/products'>
+				<h1 className='text-xl font-bold text-white p-2 inline-block bg-black rounded'>
+					Products
+				</h1>
+			</Link>
 		</main>
 	);
 };

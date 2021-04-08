@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-export const ProductDetails = ({ productData }) => {
-	const { imgs } = productData;
+export const ProductDetails = ({ product }) => {
+	const { imgs } = product;
 	const [img, setImg] = useState(0);
 
 	return (
@@ -15,7 +15,7 @@ export const ProductDetails = ({ productData }) => {
 							setImg(img - 1);
 						}
 					}}
-					disabled={img == 0}>
+					disabled={img === 0}>
 					/<br />\
 				</button>
 				<img src={imgs[img]} alt='' id='big-image' className='w-11/12' />
@@ -32,14 +32,14 @@ export const ProductDetails = ({ productData }) => {
 				</button>
 			</div>
 			<h1 id='product-name' className='text-2xl font-logo italic'>
-				{productData.name}
+				{product.name}
 			</h1>
 			<h2 id='product-brand' className='text-lg font-logo leading-3'>
-				{productData.brand}
+				{product.brand}
 			</h2>
 			<br />
 			<h1 id='product-price' className='text-3xl font-bold leading-5'>
-				${productData.price}
+				${product.price}
 			</h1>
 		</div>
 	);
