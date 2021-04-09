@@ -4,12 +4,11 @@ import { Logo } from './Logo';
 // import cart from '../assets/shopping-cart.svg';
 // import user from '../assets/user.svg';
 import { Link } from 'react-router-dom';
-import { Context } from '../store';
 import { auth } from '../firebase/utils';
+import { useSelector } from 'react-redux';
 
 export const Navbar = () => {
-	const { state } = useContext(Context);
-	const currentUser = state.currentUser;
+	const currentUser = useSelector((state) => state.user.currentUser);
 
 	return (
 		<nav className='flex space-betweens w-full' id='navbar'>
@@ -30,8 +29,6 @@ export const Navbar = () => {
 						Logout
 					</h1>
 				)}
-				{/* <NavbarIcon icon={user} link={'/pouf-co/login'} /> */}
-				{/* <NavbarIcon icon={cart} link={'/pouf-co/cart'} /> */}
 			</div>
 		</nav>
 	);
