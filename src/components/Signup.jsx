@@ -29,13 +29,13 @@ export const SignUp = () => {
 			return;
 		}
 		try {
-			const { user } = await auth.createUserWithEmailAndPassword(
-				email,
-				password
-			);
-
+			const { user } = await auth
+				.createUserWithEmailAndPassword(email, password)
+				.catch((error) => {
+					console.log('Sign in with email and password says: ' + error.message);
+					setForm({ ...form, errors: [error.message] });
+				});
 			await handleUserProfile(user, { displayName });
-
 			setForm(initialState);
 		} catch (error) {
 			console.log(error.message);

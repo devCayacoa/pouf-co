@@ -8,6 +8,7 @@ import { FormInput } from './forms/FormInput';
 const initialState = {
 	email: '',
 	password: '',
+	errors: [],
 };
 
 export const SignIn = () => {
@@ -25,16 +26,20 @@ export const SignIn = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		const { email, password } = form;
-		try {
-			auth.signInWithEmailAndPassword(email, password);
-		} catch (error) {
-			console.log(error.message);
-		}
+
+		auth.signInWithEmailAndPassword(email, password).catch((error) => {
+			console.log('Sign in with email and password says: ' + error.message);
+			setForm({ ...form, errors: [error.message] });
+		});
 	};
 
 	return (
 		<div className='signin'>
 			<AuthWrapper headline={'Log In'}>
+				<ul>
+					{form.errors.length > 0 &&
+						form.errors.map((elem, pos) => <li key={pos}>{elem}</li>)}
+				</ul>
 				<form action='' onSubmit={handleSubmit}>
 					<FormInput
 						type='email'
