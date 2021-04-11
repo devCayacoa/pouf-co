@@ -17,7 +17,7 @@ export const Navbar = () => {
 				{!currentUser && (
 					<>
 						<Link to='/registration'>
-							<h1>Register</h1>
+							<h1 className='ml-2'>Register</h1>
 						</Link>
 						<Link to='/login'>
 							<h1 className='ml-2'>Login</h1>
@@ -25,9 +25,14 @@ export const Navbar = () => {
 					</>
 				)}
 				{currentUser && (
-					<h1 className='ml-2' onClick={() => auth.signOut()}>
-						Logout
-					</h1>
+					<>
+						<Link to='/dashboard'>
+							<h1 className=''>Dashboard</h1>
+						</Link>
+						<h1 className='ml-2' onClick={() => auth.signOut()}>
+							Logout
+						</h1>
+					</>
 				)}
 			</div>
 		</nav>

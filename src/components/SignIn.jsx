@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router';
 import { auth, signInWithGoogle } from '../firebase/utils';
 import { AuthWrapper } from './AuthWrapper';
 import { ForgotPassword } from './ForgotPassword';
@@ -13,14 +14,17 @@ const initialState = {
 
 export const SignIn = () => {
 	const [form, setForm] = useState(initialState);
+	const history = useHistory();
 
-	const GoogleLogin = (e) => {
+	const GoogleLogin = async (e) => {
 		e.preventDefault();
-		signInWithGoogle();
+		await signInWithGoogle();
+		history.push('/');
 	};
+
 	const handleChange = (e) => {
 		const { name, value } = e.target;
-		setForm({ ...form, [name]: value });
+		setForm((prevForm) => ({ ...prevForm, [name]: value }));
 	};
 
 	const handleSubmit = (e) => {
@@ -29,8 +33,11 @@ export const SignIn = () => {
 
 		auth.signInWithEmailAndPassword(email, password).catch((error) => {
 			console.log('Sign in with email and password says: ' + error.message);
-			setForm({ ...form, errors: [error.message] });
+			setForm((prevForm) => ({ ...prevForm, errors: [error.message] }));
 		});
+		setForm(initialState);
+
+		history.push('/');
 	};
 
 	return (

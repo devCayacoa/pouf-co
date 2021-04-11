@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router';
 import { auth, handleUserProfile } from '../firebase/utils';
 import { AuthWrapper } from './AuthWrapper';
 import { Button } from './forms/Button';
@@ -14,18 +15,19 @@ const initialState = {
 
 export const SignUp = () => {
 	const [form, setForm] = useState(initialState);
+	const history = useHistory();
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
-		setForm({ ...form, [name]: value });
+		setForm((prevForm) => ({ ...prevForm, [name]: value }));
 	};
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		const { displayName, email, password, confirmPassword, errors } = form;
+		const { displayName, email, password, confirmPassword } = form;
 		if (password !== confirmPassword) {
 			const err = ["Passwords don't match"];
-			setForm({ ...form, errors: [err] });
+			setForm((prevForm) => ({ ...prevForm, errors: [err] }));
 			return;
 		}
 		try {
@@ -33,10 +35,14 @@ export const SignUp = () => {
 				.createUserWithEmailAndPassword(email, password)
 				.catch((error) => {
 					console.log('Sign in with email and password says: ' + error.message);
-					setForm({ ...form, errors: [error.message] });
+					setForm((prevForm) => ({ ...prevForm, errors: [error.message] }));
 				});
+
 			await handleUserProfile(user, { displayName });
+
 			setForm(initialState);
+
+			history.push('/');
 		} catch (error) {
 			console.log(error.message);
 		}
