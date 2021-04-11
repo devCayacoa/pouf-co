@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
 import { Redirect, Route, Switch } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 
 import { auth, handleUserProfile } from './firebase/utils';
 
@@ -20,17 +20,18 @@ import { ProductDetailsContainer } from './components/ProductDetailsContainer';
 import { clearCurrentUser, setCurrentUser } from './redux/User/user.actions';
 
 const App = (props) => {
-	const { setCurrentUser, clearCurrentUser } = props;
+	const dispatch = useDispatch();
+
 	useEffect(() => {
 		let authListener = auth.onAuthStateChanged(async (userAuth) => {
 			if (userAuth) {
 				const userRef = await handleUserProfile(userAuth);
-				userRef.onSnapshot((snapshot) => {
-					setCurrentUser({ id: snapshot.id, ...snapshot.data() });
-				});
+				userRef.onSnapshot((snapshot) =>
+					dispatch(setCurrentUser({ id: snapshot.id, ...snapshot.data() }))
+				);
 				return;
 			}
-			clearCurrentUser();
+			dispatch(clearCurrentUser());
 		});
 
 		return () => {
@@ -67,13 +68,4 @@ const App = (props) => {
 	);
 };
 
-const mapStateToProps = ({ user }) => ({
-	currentUser: user.currentUser,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-	setCurrentUser: (user) => dispatch(setCurrentUser(user)),
-	clearCurrentUser: () => dispatch(clearCurrentUser()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

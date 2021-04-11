@@ -1,45 +1,51 @@
-import React, { useState } from 'react';
-import { withRouter } from 'react-router';
-import { auth } from '../firebase/utils';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
+
+import { resetAuthForms, resetPassword } from '../redux/User/user.actions';
 import { AuthWrapper } from './AuthWrapper';
 import { Button } from './forms/Button';
 import { FormInput } from './forms/FormInput';
 
-const initialState = {
-	email: '',
-	errors: [],
-};
+const mapState = ({ user }) => ({
+	resetPassSuccess: user.resetPassSuccess,
+	resetPassError: user.resetPassError,
+});
 
 const EmailPassword = (props) => {
-	const [form, setForm] = useState(initialState);
-	const handleChange = (e) => {
-		const { name, value } = e.target;
-		setForm({ ...form, [name]: value });
-	};
+	const [email, setEmail] = useState('');
+	const [errors, setErrors] = useState([]);
+
+	const history = useHistory();
+
+	const { resetPassSuccess, resetPassError } = useSelector(mapState);
+	const dispatch = useDispatch();
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		try {
-			const { email } = form;
-			const config = {
-				url: process.env.REACT_APP_URL + 'login',
-			};
-			await auth
-				.sendPasswordResetEmail(email, config)
-				.then(() => {
-					console.log('Password reset');
-					props.history.push('/login');
-				})
-				.catch((err) => setForm({ ...form, errors: [err.message] }));
-		} catch (error) {
-			console.log(error.message);
-		}
+		dispatch(resetPassword({ email }));
 	};
+
+	useEffect(() => {
+		if (resetPassSuccess) {
+			setEmail('');
+			dispatch(resetAuthForms());
+			history.push('/login');
+		}
+	}, [resetPassSuccess]);
+
+	useEffect(() => {
+		if (Array.isArray(resetPassError) && resetPassError.length > 0) {
+			setErrors([resetPassError]);
+		}
+	}, [resetPassError]);
+
 	return (
 		<div className='email-password'>
 			<AuthWrapper headline='Email Password'>
-				{form.errors.length > 0 && (
+				{errors.length > 0 && (
 					<ul>
-						{form.errors.map((elem, pos) => (
+						{errors.map((elem, pos) => (
 							<li className={'text-red-600'} key={pos}>
 								{elem}
 							</li>
@@ -50,9 +56,9 @@ const EmailPassword = (props) => {
 					<FormInput
 						type='email'
 						name='email'
-						value={form.email}
+						value={email}
 						placeholder='Email'
-						onChange={handleChange}
+						onChange={(e) => setEmail(e.target.value)}
 					/>
 					<Button type='submit'>Recover</Button>
 				</form>
@@ -61,4 +67,4 @@ const EmailPassword = (props) => {
 	);
 };
 
-export default withRouter(EmailPassword);
+export default EmailPassword;
