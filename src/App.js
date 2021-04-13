@@ -16,28 +16,14 @@ import { Recovery } from './pages/Recovery';
 import { ProductsContainer } from './components/ProductsContainer';
 import { Header } from './components/Header';
 import { ProductDetailsContainer } from './components/ProductDetailsContainer';
+import { checkUserSession } from './redux/User/user.actions';
 
-import { clearCurrentUser, setCurrentUser } from './redux/User/user.actions';
-
-const App = (props) => {
+const App = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		let authListener = auth.onAuthStateChanged(async (userAuth) => {
-			if (userAuth) {
-				const userRef = await handleUserProfile(userAuth);
-				userRef.onSnapshot((snapshot) =>
-					dispatch(setCurrentUser({ id: snapshot.id, ...snapshot.data() }))
-				);
-				return;
-			}
-			dispatch(clearCurrentUser());
-		});
-
-		return () => {
-			authListener();
-		};
-	}, [setCurrentUser, clearCurrentUser]);
+		dispatch(checkUserSession());
+	}, []);
 
 	return (
 		<div id='App' className='subpixel-antialiased w-screen'>

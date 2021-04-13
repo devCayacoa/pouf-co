@@ -6,6 +6,7 @@ import { Logo } from './Logo';
 import { Link } from 'react-router-dom';
 import { auth } from '../firebase/utils';
 import { useSelector } from 'react-redux';
+import { LogOut } from './LogOut';
 
 export const Navbar = () => {
 	const currentUser = useSelector((state) => state.user.currentUser);
@@ -29,9 +30,7 @@ export const Navbar = () => {
 						<Link to='/dashboard'>
 							<h1 className=''>Dashboard</h1>
 						</Link>
-						<h1 className='ml-2' onClick={() => auth.signOut()}>
-							Logout
-						</h1>
+						<LogOut />
 					</>
 				)}
 			</div>

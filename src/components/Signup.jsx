@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
-import { auth, handleUserProfile } from '../firebase/utils';
-import { resetAuthForms, signUpUser } from '../redux/User/user.actions';
+import { signUpUserStart } from '../redux/User/user.actions';
 import { AuthWrapper } from './AuthWrapper';
 import { Button } from './forms/Button';
 import { FormInput } from './forms/FormInput';
@@ -16,8 +15,8 @@ const initialState = {
 };
 
 const mapState = ({ user }) => ({
-	signUpSuccess: user.signUpSuccess,
-	signUpError: user.signUpError,
+	currentUser: user.currentUser,
+	userErr: user.userErr,
 });
 
 export const SignUp = () => {
@@ -26,7 +25,7 @@ export const SignUp = () => {
 	const history = useHistory();
 
 	const dispatch = useDispatch();
-	const { signUpSuccess, signUpError } = useSelector(mapState);
+	const { currentUser, userErr } = useSelector(mapState);
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -36,45 +35,23 @@ export const SignUp = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		const { displayName, email, password, confirmPassword } = form;
-
-		dispatch(signUpUser({ displayName, email, password, confirmPassword }));
-
-		// 	if (password !== confirmPassword) {
-		// 		const err = ["Passwords don't match"];
-		// 		setForm((prevForm) => ({ ...prevForm, errors: [err] }));
-		// 		return;
-		// 	}
-		// 	try {
-		// 		const { user } = await auth
-		// 			.createUserWithEmailAndPassword(email, password)
-		// 			.catch((error) => {
-		// 				console.log('Sign in with email and password says: ' + error.message);
-		// 				setForm((prevForm) => ({ ...prevForm, errors: [error.message] }));
-		// 			});
-
-		// 		await handleUserProfile(user, { displayName });
-
-		// 		setForm(initialState);
-
-		// 		history.push('/');
-		// 	} catch (error) {
-		// 		console.log(error.message);
-		// 	}
+		dispatch(
+			signUpUserStart({ displayName, email, password, confirmPassword })
+		);
 	};
 
 	useEffect(() => {
-		if (signUpSuccess) {
+		if (currentUser) {
 			setForm(initialState);
-			dispatch(resetAuthForms());
 			history.push('/');
 		}
-	}, [signUpSuccess]);
+	}, [currentUser]);
 
 	useEffect(() => {
-		if (Array.isArray(signUpError) && signUpError.length > 0) {
-			setForm((prevState) => ({ ...prevState, errors: signUpError }));
+		if (Array.isArray(userErr) && userErr.length > 0) {
+			setForm((prevState) => ({ ...prevState, errors: userErr }));
 		}
-	}, [signUpError]);
+	}, [userErr]);
 
 	return (
 		<div className='signup'>

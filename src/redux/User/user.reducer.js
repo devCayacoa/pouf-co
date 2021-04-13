@@ -2,14 +2,8 @@ const { userTypes } = require('./user.types');
 
 const INITIAL_STATE = {
 	currentUser: null,
-
-	signInSuccess: false,
-
-	signUpSuccess: false,
-	signUpError: [],
-
-	resetPassSuccess: false,
-	resetPassError: [],
+	resetPasswordSuccess: false,
+	userErr: [],
 };
 
 export const userReducer = (state = INITIAL_STATE, { type, payload }) => {
@@ -17,42 +11,23 @@ export const userReducer = (state = INITIAL_STATE, { type, payload }) => {
 		SET_CURRENT_USER,
 		CLEAR_CURRENT_USER,
 		SIGN_IN_SUCCESS,
-		SIGN_UP_ERROR,
-		SIGN_UP_SUCCESS,
-		RESET_PASS_ERROR,
-		RESET_PASS_SUCCESS,
-		RESET_AUTH_FORMS,
+		SIGN_OUT_USER_SUCCESS,
+		USER_ERROR,
+		RESET_PASSWORD_SUCCESS,
+		RESET_USER_STATE,
 	} = userTypes;
+	
 	switch (type) {
-		case SET_CURRENT_USER:
-			return { ...state, currentUser: payload };
-		case CLEAR_CURRENT_USER:
-			return { ...state, currentUser: null };
-
 		case SIGN_IN_SUCCESS:
-			return { ...state, signInSuccess: payload };
+			return { ...state, currentUser: payload, userErr: [] };
+		case RESET_USER_STATE:
+		case SIGN_OUT_USER_SUCCESS:
+			return { ...INITIAL_STATE };
+		case RESET_PASSWORD_SUCCESS:
+			return { ...state, resetPasswordSuccess: payload };
+		case USER_ERROR:
+			return { ...state, userErr: payload };
 
-		case SIGN_UP_SUCCESS:
-			return { ...state, signUpSuccess: payload };
-		case SIGN_UP_ERROR:
-			return { ...state, signUpError: payload };
-
-		case RESET_PASS_SUCCESS:
-			return { ...state, resetPassSuccess: payload };
-		case RESET_PASS_ERROR:
-			return { ...state, resetPassError: payload };
-
-		case RESET_AUTH_FORMS:
-			return {
-				...state,
-				signInSuccess: false,
-
-				signUpSuccess: false,
-				signUpError: [],
-
-				resetPassSuccess: false,
-				resetPassError: [],
-			};
 		default:
 			return state;
 	}

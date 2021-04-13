@@ -11,9 +11,8 @@ import { Button } from './forms/Button';
 import { FormInput } from './forms/FormInput';
 
 import {
-	resetAuthForms,
-	signInUser,
-	signInWithGoogle,
+	emailSignInStart,
+	googleSignInStart,
 } from '../redux/User/user.actions';
 
 const initialState = {
@@ -22,7 +21,7 @@ const initialState = {
 	errors: [],
 };
 
-const mapState = ({ user }) => ({ signInSuccess: user.signInSuccess });
+const mapState = ({ user }) => ({ currentUser: user.currentUser });
 
 export const SignIn = () => {
 	const [form, setForm] = useState(initialState);
@@ -30,9 +29,9 @@ export const SignIn = () => {
 	const history = useHistory();
 
 	const dispatch = useDispatch();
-	const { signInSuccess } = useSelector(mapState);
+	const { currentUser } = useSelector(mapState);
 
-	const handleGoogleSignIn = (e) => dispatch(signInWithGoogle());
+	const handleGoogleSignIn = (e) => dispatch(googleSignInStart());
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -42,17 +41,16 @@ export const SignIn = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		const { email, password } = form;
-		dispatch(signInUser({ email, password }));
+		dispatch(emailSignInStart({ email, password }));
 	};
 
 	useEffect(() => {
-		if (signInSuccess) {
+		if (currentUser) {
 			setForm(initialState);
-			dispatch(resetAuthForms());
 			history.push('/');
 		}
 		return () => {};
-	}, [signInSuccess]);
+	}, [currentUser]);
 
 	return (
 		<div className='signin'>
