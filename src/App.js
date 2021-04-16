@@ -17,6 +17,9 @@ import { ProductsContainer } from './components/ProductsContainer';
 import { Header } from './components/Header';
 import { ProductDetailsContainer } from './components/ProductDetailsContainer';
 import { checkUserSession } from './redux/User/user.actions';
+import { Admin } from './pages/Admin';
+import WithAdminAuth from './hoc/WithAdminAuth';
+import { AdminToolbar } from './components/AdminToolbar';
 
 const App = () => {
 	const dispatch = useDispatch();
@@ -27,6 +30,7 @@ const App = () => {
 
 	return (
 		<div id='App' className='subpixel-antialiased w-screen'>
+			<AdminToolbar />
 			<Header />
 			<main className=''>
 				<Switch>
@@ -45,6 +49,14 @@ const App = () => {
 							<WithAuth>
 								<Dashboard />
 							</WithAuth>
+						)}
+					/>
+					<Route
+						path='/admin'
+						render={() => (
+							<WithAdminAuth>
+								<Admin />
+							</WithAdminAuth>
 						)}
 					/>
 				</Switch>
