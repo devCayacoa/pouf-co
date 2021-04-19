@@ -1,9 +1,6 @@
-import React from 'react'
+import React from 'react';
+import { AdminConsole } from '../components/AdminConsole';
 
 export const Admin = () => {
-    return (
-        <div>
-            <h1 className="text-2xl font-bold">My Admin</h1>
-        </div>
-    )
-}
+	return <AdminConsole />;
+};

@@ -1,5 +1,10 @@
 import { all, call, takeLatest, put } from '@redux-saga/core/effects';
-import { auth, getCurrentUser, GoogleProvider, handleUserProfile } from '../../firebase/utils';
+import {
+	auth,
+	getCurrentUser,
+	GoogleProvider,
+	handleUserProfile,
+} from '../../firebase/utils';
 import {
 	resetPasswordSuccess,
 	signInSuccess,
@@ -100,14 +105,14 @@ export function* onResetPasswordStart() {
 
 export function* googleSignIn() {
 	try {
-		const {user} = yield auth.signInWithPopup(GoogleProvider)
+		const { user } = yield auth.signInWithPopup(GoogleProvider);
 		yield getSnapshotFromUserAuth(user);
 	} catch (error) {
 		// console.log(error)
 	}
 }
 export function* onGoogleSignInStart() {
-	yield takeLatest(userTypes.GOOGLE_SIGN_IN_START, googleSignIn)
+	yield takeLatest(userTypes.GOOGLE_SIGN_IN_START, googleSignIn);
 }
 
 export default function* userSagas() {
@@ -116,6 +121,7 @@ export default function* userSagas() {
 		call(onCheckUserSession),
 		call(onSignOutUserStart),
 		call(onSignUpUserStart),
-		call(onResetPasswordStart),call(onGoogleSignInStart)
+		call(onResetPasswordStart),
+		call(onGoogleSignInStart),
 	]);
 }
