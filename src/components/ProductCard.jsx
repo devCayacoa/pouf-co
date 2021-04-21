@@ -5,6 +5,7 @@ import {
 	fetchProductStart,
 	setProduct,
 } from '../redux/Products/products.actions';
+import { AddToCart } from './AddToCart';
 import { Button } from './forms/Button';
 
 const mapState = ({ productsData }) => ({
@@ -47,7 +48,7 @@ export const ProductCard = () => {
 						</li>
 
 						<li className='product-addtocart'>
-							<Button {...configAddToCart}>Add to cart</Button>
+							<AddToCart product={product} />
 						</li>
 						<span dangerouslySetInnerHTML={{ __html: description }}></span>
 					</ul>

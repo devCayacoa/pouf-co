@@ -69,7 +69,7 @@ export const ProductResults = ({}) => {
 						)
 							return null;
 
-						return <Product key={product.id} product={product} />;
+						return <Product key={product.uid} product={product} />;
 					})}
 				</div>
 			)}
