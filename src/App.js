@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react';
 
-import { Redirect, Route, Switch } from 'react-router-dom';
-import { connect, useDispatch, useSelector } from 'react-redux';
-
-import { auth, handleUserProfile } from './firebase/utils';
+import { Route, Switch } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import WithAuth from './hoc/WithAuth';
 
@@ -13,13 +11,14 @@ import { Registration } from './pages/Registration';
 import Dashboard from './pages/Dashboard';
 import { Recovery } from './pages/Recovery';
 
-import { ProductsContainer } from './components/ProductsContainer';
 import { Header } from './components/Header';
 import { ProductDetailsContainer } from './components/ProductDetailsContainer';
 import { checkUserSession } from './redux/User/user.actions';
 import { Admin } from './pages/Admin';
 import WithAdminAuth from './hoc/WithAdminAuth';
 import { AdminToolbar } from './components/AdminToolbar';
+import { Search } from './pages/Search';
+import { ProductResults } from './components/Products';
 
 const App = () => {
 	const dispatch = useDispatch();
@@ -35,7 +34,7 @@ const App = () => {
 			<main className=''>
 				<Switch>
 					<Route exact path={'/'} component={Home} />
-					{/* <Route path='/products' component={ProductsContainer} /> */}
+					<Route path='/products' component={ProductResults} />
 					{/* <Route
 						path={'/product/:productId'}
 						component={ProductDetailsContainer}
@@ -59,6 +58,8 @@ const App = () => {
 							</WithAdminAuth>
 						)}
 					/>
+					<Route exact path={'/search'} component={Search} />{' '}
+					<Route exact path={'/search/:filterType'} component={Search} />{' '}
 				</Switch>
 			</main>
 			{/* <Footer /> */}

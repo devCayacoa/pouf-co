@@ -28,18 +28,18 @@ export function* addNewProduct({ payload }) {
 	}
 }
 
-export function* fetchProducts() {
+export function* fetchProducts({ payload: { filterType } }) {
 	try {
-		const products = yield handleFetchProducts();
+		const products = yield handleFetchProducts({ filterType });
 		yield put(setProducts(products));
 	} catch (error) {
-		// console.log(error)
+		console.log(error);
 	}
 }
 
-export function* deleteProduct({payload: uid}) {
+export function* deleteProduct({ payload: uid }) {
 	try {
-		console.log("UID " + uid)
+		console.log('UID ' + uid);
 		yield handleDeleteProduct(uid);
 		yield put(fetchProductsStart());
 	} catch (error) {

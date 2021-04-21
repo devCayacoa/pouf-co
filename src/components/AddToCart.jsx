@@ -1,11 +1,13 @@
-import React, { useContext } from 'react';
-import { Context } from '../App';
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { Button } from './forms/Button';
 
 export const AddToCart = ({ id }) => {
-	const { state, dispatch } = useContext(Context);
-	return (
-		<button
-			onClick={() => dispatch({ type: 'ADD_TO_CART', payload: id })}
-			className=''></button>
+const dispatch = useDispatch()	
+
+return (
+		<Button
+			onClick={() => {}}
+			className='bg-black text-white inline-block w-full p-1'>Add to cart</Button>
 	);
 };

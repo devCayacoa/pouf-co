@@ -11,10 +11,12 @@ export const handleAddProduct = (product) =>
 			.catch((err) => reject(err));
 	});
 
-export const handleFetchProducts = () =>
+export const handleFetchProducts = ({ filterType }) =>
 	new Promise((resolve, reject) => {
-		firestore
-			.collection('products')
+		console.log(filterType)
+		let ref = firestore.collection('products').orderBy('createdDate');
+		if (filterType) ref = ref.where('category', '==', filterType);
+		ref
 			.get()
 			.then((snapshot) =>
 				resolve(snapshot.docs.map((doc) => ({ ...doc.data(), uid: doc.id })))

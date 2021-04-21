@@ -10,7 +10,7 @@ export const addNewProductStart = (payload) => ({
 	payload,
 });
 
-export const fetchProductsStart = () => ({ type: FETCH_PRODUCTS_START });
+export const fetchProductsStart = (payload={}) => ({ type: FETCH_PRODUCTS_START, payload });
 
 export const setProducts = (payload) => ({ type: SET_PRODUCTS, payload });
 
