@@ -1,18 +1,35 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useRouteMatch } from 'react-router-dom';
-import { deleteProductStart, fetchProductsStart } from '../redux/Products/products.actions';
+import {
+	deleteProductStart,
+	fetchProductsStart,
+} from '../redux/Products/products.actions';
+import { LoadMore } from './LoadMore';
 
 const mapState = ({ productsData }) => ({ products: productsData.products });
 
 export const AdminProducts = () => {
 	const dispatch = useDispatch();
 	const { products } = useSelector(mapState);
+	const { data, queryDoc, isLastPage } = products;
 
 	useEffect(() => {
 		dispatch(fetchProductsStart());
 	}, []);
 
+	const handleLoadMore = () => {
+		dispatch(
+			fetchProductsStart({
+				startAfterDoc: queryDoc,
+				persistProducts: data,
+			})
+		);
+	};
+
+	const configLoadMore = {
+		handleLoadMore,
+	};
 	return (
 		<div className={'manage-products'}>
 			<Link to={'/admin/add-new'}>Add new product</Link>
@@ -27,9 +44,9 @@ export const AdminProducts = () => {
 						<td>
 							<table>
 								<tbody>
-									{products.length > 0 &&
-										products.map((product, index) => {
-											const { uid ,name, thumbnail, price, category } = product;
+									{data &&
+										data.map((product, index) => {
+											const { uid, name, thumbnail, price, category } = product;
 											return (
 												<tr key={index} className={'border-2 '}>
 													<td className={'border-2'}>
@@ -38,7 +55,12 @@ export const AdminProducts = () => {
 													<td>{name}</td>
 													<td>${price}</td>
 													<td>{category}</td>
-												<td><button onClick={()=>dispatch(deleteProductStart(uid))}>Delete</button></td>
+													<td>
+														<button
+															onClick={() => dispatch(deleteProductStart(uid))}>
+															Delete
+														</button>
+													</td>
 												</tr>
 											);
 										})}
@@ -48,6 +70,7 @@ export const AdminProducts = () => {
 					</tr>
 				</tbody>
 			</table>
+			{!isLastPage && <LoadMore {...configLoadMore} />}
 		</div>
 	);
 };

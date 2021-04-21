@@ -12,13 +12,11 @@ import Dashboard from './pages/Dashboard';
 import { Recovery } from './pages/Recovery';
 
 import { Header } from './components/Header';
-import { ProductDetailsContainer } from './components/ProductDetailsContainer';
 import { checkUserSession } from './redux/User/user.actions';
 import { Admin } from './pages/Admin';
 import WithAdminAuth from './hoc/WithAdminAuth';
 import { AdminToolbar } from './components/AdminToolbar';
 import { Search } from './pages/Search';
-import { ProductResults } from './components/Products';
 
 const App = () => {
 	const dispatch = useDispatch();
@@ -34,7 +32,6 @@ const App = () => {
 			<main className=''>
 				<Switch>
 					<Route exact path={'/'} component={Home} />
-					<Route path='/products' component={ProductResults} />
 					{/* <Route
 						path={'/product/:productId'}
 						component={ProductDetailsContainer}

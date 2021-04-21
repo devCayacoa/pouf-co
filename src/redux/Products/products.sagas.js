@@ -28,9 +28,9 @@ export function* addNewProduct({ payload }) {
 	}
 }
 
-export function* fetchProducts({ payload: { filterType } }) {
+export function* fetchProducts({ payload }) {
 	try {
-		const products = yield handleFetchProducts({ filterType });
+		const products = yield handleFetchProducts(payload);
 		yield put(setProducts(products));
 	} catch (error) {
 		console.log(error);

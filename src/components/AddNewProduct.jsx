@@ -29,7 +29,7 @@ export const AddNewProduct = () => {
 			addNewProductStart({
 				name: name.trim(),
 				thumbnail: thumbnail.split('\n').map((elem) => elem.trim()),
-				price,
+				price: parseFloat(price),
 				category: category.trim(),
 				tags: tags.split(',').map((elem) => elem.trim()),
 			})
@@ -45,8 +45,8 @@ export const AddNewProduct = () => {
 			<form onSubmit={handleSubmit} className='' id=''>
 				<Select
 					options={[
-						{ value: 'men', name: 'Men' },
-						{ value: 'women', name: 'Women' },
+						{ value: 'mens', name: 'Mens' },
+						{ value: 'womens', name: 'Womens' },
 					]}
 					defaultValue={category}
 					onChange={(e) => setProductCategory(e.target.value)}
@@ -80,15 +80,14 @@ export const AddNewProduct = () => {
 					required
 				/>
 				<FormInput
-					type='number'
+					type='text'
 					name='price'
 					value={price}
-					placeholder={0}
 					onChange={(e) => setPrice(e.target.value)}
 					required
 				/>
 				<Button type={'submit'}>Add</Button>
-			</form>{' '}
+			</form>
 		</div>
 	);
 };
