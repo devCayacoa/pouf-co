@@ -2,7 +2,6 @@ import { firestore } from '../../firebase/utils';
 
 export const handleAddProduct = (product) =>
 	new Promise((resolve, reject) => {
-		console.log('Sending it to the firestore...');
 		firestore
 			.collection('products')
 			.doc()
@@ -12,7 +11,7 @@ export const handleAddProduct = (product) =>
 	});
 
 export const handleFetchProducts = ({
-	filterType='',
+	filterType = '',
 	startAfterDoc,
 	persistProducts = [],
 }) =>
@@ -52,3 +51,15 @@ export const handleDeleteProduct = (uid) => {
 			.catch((err) => reject(err));
 	});
 };
+
+export const handleFetchProduct = (id) =>
+	new Promise((resolve, reject) => {
+		firestore
+			.collection('products')
+			.doc(id)
+			.get()
+			.then((snapshot) => {
+				if (snapshot.exists) resolve(snapshot.data());
+			})
+			.catch((err) => reject(err));
+	});

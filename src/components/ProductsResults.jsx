@@ -63,12 +63,11 @@ export const ProductResults = ({}) => {
 					id={'products-grid'}
 					className={'grid border-t-2 border-gray-200 grid-cols-2'}>
 					{data.map((product) => {
-						/* if (
-						!product.name ||
-						!product.thumbnail ||
-						typeof product.price !== 'undefined'
-					)
-						return null; */
+						if (
+							!product.name ||
+							!product.thumbnail
+						)
+							return null;
 
 						return <Product key={product.id} product={product} />;
 					})}

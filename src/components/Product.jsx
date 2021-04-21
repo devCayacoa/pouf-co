@@ -8,7 +8,9 @@ export const Product = ({ product }) => {
 			<Link to={`/product/${product.uid}`}>
 				<img src={product.thumbnail[0]} alt='' className={''} />
 			</Link>
-			<h3 className='font-bold text-md ml-1 mt-2'>{product.name}</h3>
+			<Link to={`/product/${product.uid}`}>
+				<h3 className='font-bold text-md ml-1 mt-2'>{product.name}</h3>
+			</Link>
 			<h4 className='font-bold text-lg mt-2 ml-1'>${product.price}</h4>
 			<AddToCart id={product.uid} />
 		</div>

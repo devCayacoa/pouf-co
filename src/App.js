@@ -17,6 +17,7 @@ import { Admin } from './pages/Admin';
 import WithAdminAuth from './hoc/WithAdminAuth';
 import { AdminToolbar } from './components/AdminToolbar';
 import { Search } from './pages/Search';
+import { ProductDetails } from './pages/ProductDetails';
 
 const App = () => {
 	const dispatch = useDispatch();
@@ -32,10 +33,6 @@ const App = () => {
 			<main className=''>
 				<Switch>
 					<Route exact path={'/'} component={Home} />
-					{/* <Route
-						path={'/product/:productId'}
-						component={ProductDetailsContainer}
-					/> */}
 					<Route path={'/login'} render={() => <Login />} />
 					<Route path='/registration' render={() => <Registration />} />
 					<Route path='/recovery' component={Recovery} />
@@ -57,6 +54,7 @@ const App = () => {
 					/>
 					<Route exact path={'/search'} component={Search} />{' '}
 					<Route exact path={'/search/:filterType'} component={Search} />{' '}
+					<Route path={'/product/:productId'} component={ProductDetails} />
 				</Switch>
 			</main>
 			{/* <Footer /> */}

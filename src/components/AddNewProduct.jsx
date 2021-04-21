@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
+
+import CKEditor from 'ckeditor4-react';
+
 import { addNewProductStart } from '../redux/Products/products.actions';
 import { Button } from './forms/Button';
 import { FormInput } from './forms/FormInput';
@@ -15,7 +18,7 @@ export const AddNewProduct = () => {
 	const [thumbnail, setThumbnail] = useState('');
 	const [tags, setTags] = useState('');
 	const [price, setPrice] = useState(0);
-
+	const [description, setDescription] = useState('');
 	const resetForm = () => {
 		setName('');
 		setThumbnail('');
@@ -32,6 +35,7 @@ export const AddNewProduct = () => {
 				price: parseFloat(price),
 				category: category.trim(),
 				tags: tags.split(',').map((elem) => elem.trim()),
+				description,
 			})
 		);
 
@@ -86,6 +90,7 @@ export const AddNewProduct = () => {
 					onChange={(e) => setPrice(e.target.value)}
 					required
 				/>
+				<CKEditor onChange={(e) => setDescription(e.editor.getData())} />
 				<Button type={'submit'}>Add</Button>
 			</form>
 		</div>
