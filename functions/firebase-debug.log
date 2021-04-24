@@ -1,0 +1,39 @@
+[debug] [2021-04-24T22:11:14.006Z] ----------------------------------------------------------------------
+[debug] [2021-04-24T22:11:14.008Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Raul\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js emulators:start --only functions
+[debug] [2021-04-24T22:11:14.008Z] CLI Version:   9.10.0
+[debug] [2021-04-24T22:11:14.008Z] Platform:      win32
+[debug] [2021-04-24T22:11:14.008Z] Node Version:  v14.15.5
+[debug] [2021-04-24T22:11:14.009Z] Time:          Sat Apr 24 2021 19:11:14 GMT-0300 (Atlantic Daylight Time)
+[debug] [2021-04-24T22:11:14.009Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2021-04-24T22:11:14.020Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-04-24T22:11:14.021Z] > authorizing via signed-in user (soyrauluis@gmail.com)
+[info] i  emulators: Starting emulators: functions {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: functions"}}
+[debug] [2021-04-24T22:11:14.063Z] [hub] writing locator at C:\Users\Raul\AppData\Local\Temp\hub-shop-app-a3418.json
+[warn] !  functions: The following emulators are not running, calls to these services from the Functions emulator will affect production: auth, firestore, database, hosting, pubsub {"metadata":{"emulator":{"name":"functions"},"message":"The following emulators are not running, calls to these services from the Functions emulator will affect production: \u001b[1mauth, firestore, database, hosting, pubsub\u001b[22m"}}
+[warn] !  Your requested "node" version "12" doesn't match your global version "14" {"metadata":{"emulator":{"name":"functions"},"message":"Your requested \"node\" version \"12\" doesn't match your global version \"14\""}}
+[debug] [2021-04-24T22:11:14.102Z] defaultcredentials: writing to file C:\Users\Raul\AppData\Roaming\firebase\soyrauluis_gmail_com_application_default_credentials.json
+[debug] [2021-04-24T22:11:14.104Z] Setting GAC to C:\Users\Raul\AppData\Roaming\firebase\soyrauluis_gmail_com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to C:\\Users\\Raul\\AppData\\Roaming\\firebase\\soyrauluis_gmail_com_application_default_credentials.json"}}
+[debug] [2021-04-24T22:11:14.107Z] > refreshing access token with scopes: []
+[debug] [2021-04-24T22:11:14.107Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2021-04-24T22:11:14.423Z] <<< HTTP RESPONSE 200 {"date":"Sat, 24 Apr 2021 22:11:14 GMT","cache-control":"no-cache, no-store, max-age=0, must-revalidate","pragma":"no-cache","expires":"Mon, 01 Jan 1990 00:00:00 GMT","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-04-24T22:11:14.436Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/shop-app-a3418/adminSdkConfig [none]
+[debug] [2021-04-24T22:11:14.852Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/shop-app-a3418/adminSdkConfig 200
+[debug] [2021-04-24T22:11:14.852Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/shop-app-a3418/adminSdkConfig {"projectId":"shop-app-a3418","storageBucket":"shop-app-a3418.appspot.com","locationId":"southamerica-east1"}
+[info] i  ui: downloading ui-v1.4.2.zip... {"metadata":{"emulator":{"name":"ui"},"message":"downloading ui-v1.4.2.zip..."}}
+[debug] [2021-04-24T22:11:14.875Z] >>> [apiv2][query] GET https://storage.googleapis.com/firebase-preview-drop/emulator/ui-v1.4.2.zip 
+[debug] [2021-04-24T22:11:15.176Z] <<< [apiv2][status] GET https://storage.googleapis.com/firebase-preview-drop/emulator/ui-v1.4.2.zip 200
+[debug] [2021-04-24T22:11:15.176Z] <<< [apiv2][body] GET https://storage.googleapis.com/firebase-preview-drop/emulator/ui-v1.4.2.zip [stream]
+[debug] [2021-04-24T22:11:18.344Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2021-04-24T22:11:18.344Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2021-04-24T22:11:18.344Z] Starting Emulator UI with command {"binary":"node","args":["C:\\Users\\Raul\\.cache\\firebase\\emulators\\ui-v1.4.2\\server.bundle.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"C:\\\\Users\\\\Raul\\\\.cache\\\\firebase\\\\emulators\\\\ui-v1.4.2\\\\server.bundle.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
+[info] i  ui: Emulator UI logging to ui-debug.log {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI logging to \u001b[1mui-debug.log\u001b[22m"}}
+[debug] [2021-04-24T22:11:18.494Z] Web / API server started at http://localhost:4000
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at http://localhost:4000\n"}}
+[info] i  functions: Watching "D:\Web Dev\Frontend\ReactApp\shop\functions" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"D:\\Web Dev\\Frontend\\ReactApp\\shop\\functions\" for Cloud Functions..."}}
+[debug] [2021-04-24T22:11:18.640Z] [worker-pool] addWorker(~diagnostic~) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] addWorker(~diagnostic~)"}}
+[debug] [2021-04-24T22:11:18.640Z] [worker-pool] Adding worker with key ~diagnostic~, total=1 {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] Adding worker with key ~diagnostic~, total=1"}}
+[debug] [2021-04-24T22:11:18.640Z] [worker-pool] submitWork(triggerId=) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] submitWork(triggerId=)"}}
+[debug] [2021-04-24T22:11:18.640Z] [worker-~diagnostic~-26b69659-7eee-46bb-be55-5c66a5cf07e8]: Assigning socketPath: \\?\pipe\D:\Web Dev\Frontend\ReactApp\shop\functions\16996 {"metadata":{"emulator":{"name":"functions"},"message":"[worker-~diagnostic~-26b69659-7eee-46bb-be55-5c66a5cf07e8]: Assigning socketPath: \\\\?\\pipe\\D:\\Web Dev\\Frontend\\ReactApp\\shop\\functions\\16996"}}
+[debug] [2021-04-24T22:11:18.641Z] [worker-~diagnostic~-26b69659-7eee-46bb-be55-5c66a5cf07e8]: BUSY {"metadata":{"emulator":{"name":"functions"},"message":"[worker-~diagnostic~-26b69659-7eee-46bb-be55-5c66a5cf07e8]: BUSY"}}
