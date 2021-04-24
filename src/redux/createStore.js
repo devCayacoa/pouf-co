@@ -8,7 +8,7 @@ import thunk from 'redux-thunk';
 import rootReducer from './rootReducer';
 import rootSaga from './rootSaga';
 
-import * as actionCreators from './User/user.actions'
+import { persistStore } from 'redux-persist';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -20,13 +20,14 @@ const composeEnhancers =
 			trace: true,
 			traceLimit: 25,
 		})) ||
-	compose; 
+	compose;
 
 export const store = createStore(
 	rootReducer,
 	composeEnhancers(applyMiddleware(...middlewares))
 );
-
 sagaMiddleware.run(rootSaga);
 
-export default store;
+export const persistor = persistStore(store);
+
+export default { store, persistor };
