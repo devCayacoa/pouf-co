@@ -5,6 +5,7 @@ import {
 	fetchProductStart,
 	setProduct,
 } from '../redux/Products/products.actions';
+import { numberWithCommas } from '../utils';
 import { AddToCart } from './AddToCart';
 import { Button } from './forms/Button';
 
@@ -44,7 +45,7 @@ export const ProductCard = () => {
 							<h1 className={'product-name'}>{name}</h1>
 						</li>
 						<li>
-							<span className='product-price'>${price}</span>
+							<span className='product-price'>${numberWithCommas(price)}</span>
 						</li>
 
 						<li className='product-addtocart'>

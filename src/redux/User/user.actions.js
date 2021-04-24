@@ -9,9 +9,9 @@ export const emailSignInStart = (userCredentials) => ({
 	payload: userCredentials,
 });
 
-export const signInSuccess = (payload) => ({
+export const signInSuccess = (userData) => ({
 	type: userTypes.SIGN_IN_SUCCESS,
-	payload,
+	payload: userData,
 });
 
 export const checkUserSession = () => ({ type: userTypes.CHECK_USER_SESSION });
@@ -22,21 +22,24 @@ export const signOutUserSuccess = () => ({
 	type: userTypes.SIGN_OUT_USER_SUCCESS,
 });
 
-export const signUpUserStart = (payload) => ({
+export const signUpUserStart = (userDataFromForm) => ({
 	type: userTypes.SIGN_UP_USER_START,
-	payload,
+	payload: userDataFromForm,
 });
 
-export const userError = (payload) => ({ type: userTypes.USER_ERROR, payload });
+export const userError = (error) => ({
+	type: userTypes.USER_ERROR,
+	payload: error,
+});
 
-export const resetPasswordStart = (payload) => ({
+export const resetPasswordStart = (email) => ({
 	type: userTypes.RESET_PASSWORD_START,
-	payload,
+	payload: email,
 });
 
-export const resetPasswordSuccess = (payload = true) => ({
+export const resetPasswordSuccess = (wasSuccessful = true) => ({
 	type: userTypes.RESET_PASSWORD_SUCCESS,
-	payload,
+	payload: wasSuccessful,
 });
 
 export const resetUserState = () => ({ type: userTypes.RESET_USER_STATE });

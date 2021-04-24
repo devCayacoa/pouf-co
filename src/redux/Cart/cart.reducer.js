@@ -1,5 +1,13 @@
-import { ADD_TO_CART } from './cart.types';
-import { handleAddToCart } from './cart.utils';
+import {
+	ADD_TO_CART,
+	DECREMENT_CART_ITEM,
+	REMOVE_CART_ITEM,
+} from './cart.types';
+import {
+	handleAddToCart,
+	handleDecrementCartItem,
+	handleDeleteFromCart,
+} from './cart.utils';
 
 const initialState = {
 	cartItems: [],
@@ -15,7 +23,17 @@ const cartReducer = (state = initialState, { type, payload }) => {
 					nextCartItem: payload,
 				}),
 			};
+		case REMOVE_CART_ITEM:
+			return {
+				...state,
+				cartItems: handleDeleteFromCart(state.cartItems, payload),
+			};
 
+		case DECREMENT_CART_ITEM:
+			return {
+				...state,
+				cartItems: handleDecrementCartItem(state.cartItems, payload),
+			};
 		default:
 			return state;
 	}

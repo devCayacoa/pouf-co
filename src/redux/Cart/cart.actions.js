@@ -1,6 +1,20 @@
-import { ADD_TO_CART } from './cart.types';
+import {
+	ADD_TO_CART,
+	DECREMENT_CART_ITEM,
+	REMOVE_CART_ITEM,
+} from './cart.types';
 
-export const addProduct = (payload) => ({
+export const addProduct = (product) => ({
 	type: ADD_TO_CART,
-	payload,
+	payload: product,
+});
+
+export const deleteCartItem = (cartItem) => ({
+	type: REMOVE_CART_ITEM,
+	payload: cartItem,
+});
+
+export const decrementCartItem = (cartItem) => ({
+	type: DECREMENT_CART_ITEM,
+	payload: cartItem,
 });

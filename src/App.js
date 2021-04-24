@@ -18,6 +18,7 @@ import WithAdminAuth from './hoc/WithAdminAuth';
 import { AdminToolbar } from './components/AdminToolbar';
 import { Search } from './pages/Search';
 import { ProductDetails } from './pages/ProductDetails';
+import { Cart } from './pages/Cart';
 
 const App = () => {
 	const dispatch = useDispatch();
@@ -55,6 +56,7 @@ const App = () => {
 					<Route exact path={'/search'} component={Search} />{' '}
 					<Route exact path={'/search/:filterType'} component={Search} />{' '}
 					<Route path={'/product/:productId'} component={ProductDetails} />
+					<Route path='/cart' component={Cart} />
 				</Switch>
 			</main>
 			{/* <Footer /> */}

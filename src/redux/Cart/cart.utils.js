@@ -22,3 +22,23 @@ export const handleAddToCart = ({ prevCartItems, nextCartItem }) => {
 		},
 	];
 };
+
+export const handleDeleteFromCart = (prevCartItems, cartItemToDelete) =>
+	prevCartItems.filter((item) => item.uid !== cartItemToDelete.uid);
+
+export const handleDecrementCartItem = (prevCartItems, cartItemToDecrement) => {
+	const existingCartItem = prevCartItems.find(
+		(item) => item.uid === cartItemToDecrement.uid
+	);
+	if (existingCartItem.quantity === 1)
+		return prevCartItems.filter((item) => item.uid !== cartItemToDecrement.uid);
+
+	return prevCartItems.map((item) =>
+		item.uid === existingCartItem.uid
+			? {
+					...item,
+					quantity: item.quantity - 1,
+			  }
+			: item
+	);
+};

@@ -7,29 +7,32 @@ import {
 	SET_PRODUCTS,
 } from './products.types';
 
-export const addNewProductStart = (payload) => ({
+export const addNewProductStart = (productDataFromForm) => ({
 	type: ADD_NEW_PRODUCT_START,
-	payload,
+	payload: productDataFromForm,
 });
 
-export const fetchProductsStart = (payload = {}) => ({
+export const fetchProductsStart = (filters = {}) => ({
 	type: FETCH_PRODUCTS_START,
-	payload,
+	payload: filters,
 });
 
-export const setProducts = (payload) => ({ type: SET_PRODUCTS, payload });
+export const setProducts = (productsFromFirestore) => ({
+	type: SET_PRODUCTS,
+	payload: productsFromFirestore,
+});
 
-export const deleteProductStart = (payload) => ({
+export const deleteProductStart = (idOfProductToDelete) => ({
 	type: DELETE_PRODUCT_START,
-	payload,
+	payload: idOfProductToDelete,
 });
 
-export const fetchProductStart = (payload) => ({
+export const fetchProductStart = (idOfProductToFetch) => ({
 	type: FETCH_PRODUCT_START,
-	payload,
+	payload: idOfProductToFetch,
 });
 
-export const setProduct = (payload) => ({
+export const setProduct = (productsFromFirestore) => ({
 	type: SET_PRODUCT,
-	payload,
+	payload: productsFromFirestore,
 });
