@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export const checkUserIsAdmin = (currentUser) => {
 	if (!currentUser || !Array.isArray(currentUser.userRoles)) return false;
 	const { userRoles } = currentUser;
@@ -6,3 +8,7 @@ export const checkUserIsAdmin = (currentUser) => {
 };
 
 export const numberWithCommas = (x) => x.toLocaleString();
+
+export const apiInstance = axios.create({
+	baseURL: 'http://localhost:5001/shop-app-a3418/us-central1/api',
+});

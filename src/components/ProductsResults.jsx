@@ -52,22 +52,21 @@ export const ProductResults = ({}) => {
 		handleLoadMore,
 	};
 	return (
-		<div id={'products-container'} className='mt-2'>
+		<div id='products-container' className='mt-2'>
 			<h1 className=''>Browse products</h1>
 			<Select {...configFilter} />
-			<h5 className={'ml-4 mb-2 text-sm text-gray-700'}>{data.length} items</h5>
+			<h5 className='ml-4 mb-2 text-sm text-gray-700'>{data.length} items</h5>
 			{data.length < 1 ? (
 				<p className=''>No search results.</p>
 			) : (
 				<div
-					id={'products-grid'}
-					className={'grid border-t-2 border-gray-200 grid-cols-2'}>
+					id='products-grid'
+					className='grid border-t-2 border-gray-200 grid-cols-2'
+				>
 					{data.map((product) => {
-						if (
-							!product.name ||
-							!product.thumbnail
-						)
+						if (!product.name || !product.thumbnail) {
 							return null;
+						}
 
 						return <Product key={product.uid} product={product} />;
 					})}

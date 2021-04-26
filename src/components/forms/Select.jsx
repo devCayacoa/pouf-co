@@ -18,7 +18,8 @@ const Select = ({
 				onChange={handleChange}
 				id=''
 				className=''
-				{...otherProps}>
+				{...otherProps}
+			>
 				{options.map((option, index) => {
 					const { value, name } = option;
 					return (

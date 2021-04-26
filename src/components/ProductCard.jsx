@@ -42,7 +42,7 @@ export const ProductCard = () => {
 				<div className='product-details'>
 					<ul>
 						<li>
-							<h1 className={'product-name'}>{name}</h1>
+							<h1 className='product-name'>{name}</h1>
 						</li>
 						<li>
 							<span className='product-price'>${numberWithCommas(price)}</span>
@@ -51,7 +51,7 @@ export const ProductCard = () => {
 						<li className='product-addtocart'>
 							<AddToCart product={product} />
 						</li>
-						<span dangerouslySetInnerHTML={{ __html: description }}></span>
+						<span dangerouslySetInnerHTML={{ __html: description }} />
 					</ul>
 				</div>
 			</div>

@@ -16,7 +16,7 @@ export const userReducer = (state = INITIAL_STATE, { type, payload }) => {
 		RESET_PASSWORD_SUCCESS,
 		RESET_USER_STATE,
 	} = userTypes;
-	
+
 	switch (type) {
 		case SIGN_IN_SUCCESS:
 			return { ...state, currentUser: payload, userErr: [] };

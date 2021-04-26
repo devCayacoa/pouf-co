@@ -36,7 +36,12 @@ export const SignUp = () => {
 		e.preventDefault();
 		const { displayName, email, password, confirmPassword } = form;
 		dispatch(
-			signUpUserStart({ displayName, email, password, confirmPassword })
+			signUpUserStart({
+				displayName,
+				email,
+				password,
+				confirmPassword,
+			})
 		);
 	};
 
@@ -67,32 +72,32 @@ export const SignUp = () => {
 					<FormInput
 						type='text'
 						value={form.displayName}
-						name={'displayName'}
-						placeholder={'Full name'}
+						name='displayName'
+						placeholder='Full name'
 						onChange={handleChange}
 						required
 					/>
 					<FormInput
 						type='email'
 						value={form.email}
-						name={'email'}
-						placeholder={'Email'}
+						name='email'
+						placeholder='Email'
 						onChange={handleChange}
 						required
 					/>
 					<FormInput
 						type='password'
 						value={form.password}
-						name={'password'}
-						placeholder={'Password'}
+						name='password'
+						placeholder='Password'
 						onChange={handleChange}
 						required
 					/>
 					<FormInput
 						type='password'
 						value={form.confirmPassword}
-						name={'confirmPassword'}
-						placeholder={'Confirm password'}
+						name='confirmPassword'
+						placeholder='Confirm password'
 						onChange={handleChange}
 						required
 					/>

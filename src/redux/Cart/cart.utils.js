@@ -30,8 +30,9 @@ export const handleDecrementCartItem = (prevCartItems, cartItemToDecrement) => {
 	const existingCartItem = prevCartItems.find(
 		(item) => item.uid === cartItemToDecrement.uid
 	);
-	if (existingCartItem.quantity === 1)
+	if (existingCartItem.quantity === 1) {
 		return prevCartItems.filter((item) => item.uid !== cartItemToDecrement.uid);
+	}
 
 	return prevCartItems.map((item) =>
 		item.uid === existingCartItem.uid

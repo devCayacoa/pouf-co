@@ -1,5 +1,6 @@
 import {
 	ADD_TO_CART,
+	CLEAR_CART,
 	DECREMENT_CART_ITEM,
 	REMOVE_CART_ITEM,
 } from './cart.types';
@@ -34,6 +35,9 @@ const cartReducer = (state = initialState, { type, payload }) => {
 				...state,
 				cartItems: handleDecrementCartItem(state.cartItems, payload),
 			};
+
+		case CLEAR_CART:
+			return { ...state, ...initialState };
 		default:
 			return state;
 	}

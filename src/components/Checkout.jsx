@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
 import { createStructuredSelector } from 'reselect';
 import {
 	selectCartItems,
@@ -16,6 +17,7 @@ const mapState = createStructuredSelector({
 	itemsCount: selectCartItemsCount,
 });
 export const Checkout = ({}) => {
+	const history = useHistory();
 	const { cartItems, itemsTotal, itemsCount } = useSelector(mapState);
 
 	return (
@@ -38,8 +40,18 @@ export const Checkout = ({}) => {
 					<h2 className=''>Add some items to your cart...</h2>
 				)}
 			</div>
-			<Button className='border border-gray-600'>Continue shopping</Button>
-			<Button className='ml-2 border border-gray-600'>Checkout</Button>
+			<Button
+				className='border border-gray-600'
+				onClick={() => history.goBack()}
+			>
+				Continue shopping
+			</Button>
+			<Button
+				className='ml-2 border border-gray-600'
+				onClick={() => history.push('/payment')}
+			>
+				Checkout
+			</Button>
 		</div>
 	);
 };

@@ -2,10 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 
-import {
-	resetPasswordStart,
-	resetUserState,
-} from '../redux/User/user.actions';
+import { resetPasswordStart, resetUserState } from '../redux/User/user.actions';
 
 import { AuthWrapper } from './AuthWrapper';
 import { Button } from './forms/Button';
@@ -33,7 +30,7 @@ const EmailPassword = (props) => {
 	useEffect(() => {
 		if (resetPasswordSuccess) {
 			setEmail('');
-			dispatch(resetUserState())
+			dispatch(resetUserState());
 			history.push('/login');
 		}
 	}, [resetPasswordSuccess]);
@@ -50,7 +47,7 @@ const EmailPassword = (props) => {
 				{errors.length > 0 && (
 					<ul>
 						{errors.map((elem, pos) => (
-							<li className={'text-red-600'} key={pos}>
+							<li className='text-red-600' key={pos}>
 								{elem}
 							</li>
 						))}

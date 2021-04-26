@@ -61,7 +61,7 @@ export const AddNewProduct = () => {
 					type='text'
 					name='name'
 					value={name}
-					placeholder={'Name'}
+					placeholder='Name'
 					onChange={(e) => {
 						setName(e.target.value);
 					}}
@@ -91,7 +91,7 @@ export const AddNewProduct = () => {
 					required
 				/>
 				<CKEditor onChange={(e) => setDescription(e.editor.getData())} />
-				<Button type={'submit'}>Add</Button>
+				<Button type='submit'>Add</Button>
 			</form>
 		</div>
 	);

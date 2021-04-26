@@ -7,18 +7,17 @@ export const TextArea = ({
 	rows,
 	cols,
 	...props
-}) => {
-	return (
-		<div className='form-row'>
-			{label && <label htmlFor={props.name}>{label}</label>}
-			<textarea
-				className='form-textarea rounded text-black border-2 font-bold p-2 mt-2 w-full'
-				onChange={handleChange}
-				rows={rows}
-				cols={cols}
-				{...props}>
-				{children}
-			</textarea>
-		</div>
-	);
-};
+}) => (
+	<div className='form-row'>
+		{label && <label htmlFor={props.name}>{label}</label>}
+		<textarea
+			className='form-textarea rounded text-black border-2 font-bold p-2 mt-2 w-full'
+			onChange={handleChange}
+			rows={rows}
+			cols={cols}
+			{...props}
+		>
+			{children}
+		</textarea>
+	</div>
+);

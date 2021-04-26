@@ -11,7 +11,8 @@ export const AddToCart = ({ product }) => {
 			onClick={() => {
 				dispatch(addProduct(product));
 			}}
-			className='bg-black text-white inline-block w-full p-1'>
+			className='bg-black text-white inline-block w-full p-1'
+		>
 			Add to cart
 		</Button>
 	);

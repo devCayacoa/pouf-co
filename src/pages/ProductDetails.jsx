@@ -1,7 +1,4 @@
-import React from 'react'
-import { ProductCard } from '../components/ProductCard'
+import React from 'react';
+import { ProductCard } from '../components/ProductCard';
 
-export const ProductDetails = ({}) => {
-    return (<ProductCard/>
-    )
-}
+export const ProductDetails = ({}) => <ProductCard />;

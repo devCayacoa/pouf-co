@@ -1,9 +1,9 @@
 import React from 'react';
+import { FaTrash } from 'react-icons/fa';
+import { useDispatch } from 'react-redux';
 import { Button } from './forms/Button';
 import { FormInput } from './forms/FormInput';
-import { FaTrash } from 'react-icons/fa';
 import { numberWithCommas } from '../utils';
-import { useDispatch } from 'react-redux';
 import {
 	addProduct,
 	decrementCartItem,
@@ -19,14 +19,15 @@ export const CartItem = ({ item }) => {
 	return (
 		<div className='p-2' id=''>
 			<div id='' className='flex items-center'>
-				<img src={thumbnail[0]} className='w-16' alt='' srcset='' />
+				<img src={thumbnail[0]} className='w-16' alt='' srcSet='' />
 				<div className='ml-2' id=''>
 					<p className=''>{name}</p>
-					<p className=''>$ {numberWithCommas(price)}</p>
+					<p className=''>${numberWithCommas(price)}</p>
 				</div>
 				<Button
 					className='ml-auto mr-2 text-red-500'
-					onClick={() => dispatch(deleteCartItem(item))}>
+					onClick={() => dispatch(deleteCartItem(item))}
+				>
 					<FaTrash />
 				</Button>
 			</div>
@@ -34,7 +35,8 @@ export const CartItem = ({ item }) => {
 				<div className='flex border-2 items-center'>
 					<Button
 						className={btnStyles}
-						onClick={() => dispatch(decrementCartItem(item))}>
+						onClick={() => dispatch(decrementCartItem(item))}
+					>
 						-
 					</Button>
 					<FormInput
@@ -44,7 +46,8 @@ export const CartItem = ({ item }) => {
 					/>
 					<Button
 						className={btnStyles}
-						onClick={() => dispatch(addProduct(item))}>
+						onClick={() => dispatch(addProduct(item))}
+					>
 						+
 					</Button>
 				</div>

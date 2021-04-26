@@ -1,10 +1,5 @@
 import React from 'react';
 
-export const Button = ({ children, ...props }) => {
-	return (
-		<button
-			{...props}>
-			{children}
-		</button>
-	);
-};
+export const Button = ({ children, ...props }) => (
+	<button {...props}>{children}</button>
+);

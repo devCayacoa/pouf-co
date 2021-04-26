@@ -31,8 +31,8 @@ export const AdminProducts = () => {
 		handleLoadMore,
 	};
 	return (
-		<div className={'manage-products'}>
-			<Link to={'/admin/add-new'}>Add new product</Link>
+		<div className='manage-products'>
+			<Link to='/admin/add-new'>Add new product</Link>
 			<table className=''>
 				<tbody>
 					<tr>
@@ -48,8 +48,8 @@ export const AdminProducts = () => {
 										data.map((product, index) => {
 											const { uid, name, thumbnail, price, category } = product;
 											return (
-												<tr key={index} className={'border-2 '}>
-													<td className={'border-2'}>
+												<tr key={index} className='border-2 '>
+													<td className='border-2'>
 														<img src={thumbnail[0]} alt='' />
 													</td>
 													<td>{name}</td>
@@ -57,7 +57,8 @@ export const AdminProducts = () => {
 													<td>{category}</td>
 													<td>
 														<button
-															onClick={() => dispatch(deleteProductStart(uid))}>
+															onClick={() => dispatch(deleteProductStart(uid))}
+														>
 															Delete
 														</button>
 													</td>

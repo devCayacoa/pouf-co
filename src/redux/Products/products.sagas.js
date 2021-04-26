@@ -1,6 +1,10 @@
 import { takeLatest, put, all, call } from 'redux-saga/effects';
 import { auth } from '../../firebase/utils';
-import { fetchProductsStart, setProduct, setProducts } from './products.actions';
+import {
+	fetchProductsStart,
+	setProduct,
+	setProducts,
+} from './products.actions';
 import {
 	handleAddProduct,
 	handleDeleteProduct,
@@ -17,7 +21,7 @@ import {
 export function* addNewProduct({ payload }) {
 	const timestamp = new Date();
 	try {
-		console.log('Handling new product... ' + payload.name);
+		console.log(`Handling new product... ${payload.name}`);
 
 		yield handleAddProduct({
 			...payload,
@@ -41,7 +45,7 @@ export function* fetchProducts({ payload }) {
 
 export function* deleteProduct({ payload: uid }) {
 	try {
-		console.log('UID ' + uid);
+		console.log(`UID ${uid}`);
 		yield handleDeleteProduct(uid);
 		yield put(fetchProductsStart());
 	} catch (error) {
@@ -52,7 +56,7 @@ export function* deleteProduct({ payload: uid }) {
 export function* fetchProduct({ payload }) {
 	try {
 		const product = yield handleFetchProduct(payload);
-		yield put(setProduct(product))
+		yield put(setProduct(product));
 	} catch (error) {
 		console.log(error);
 	}

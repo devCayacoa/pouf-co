@@ -27,7 +27,7 @@ export const handleUserProfile = async ({ userAuth, additionalData }) => {
 		const { displayName, email } = userAuth;
 		const timestamp = new Date();
 		const userRoles = ['user'];
-		
+
 		try {
 			await userRef.set({
 				displayName,
@@ -41,11 +41,10 @@ export const handleUserProfile = async ({ userAuth, additionalData }) => {
 	return userRef;
 };
 
-export const getCurrentUser = () => {
-	return new Promise((resolve, reject) => {
+export const getCurrentUser = () =>
+	new Promise((resolve, reject) => {
 		const unsubscribe = auth.onAuthStateChanged((userAuth) => {
 			unsubscribe();
 			resolve(userAuth);
 		}, reject);
 	});
-};

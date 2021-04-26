@@ -54,7 +54,7 @@ export const SignIn = () => {
 
 	return (
 		<div className='signin'>
-			<AuthWrapper headline={'Log In'}>
+			<AuthWrapper headline='Log In'>
 				<ul>
 					{form.errors.length > 0 &&
 						form.errors.map((elem, pos) => <li key={pos}>{elem}</li>)}
@@ -64,14 +64,14 @@ export const SignIn = () => {
 						type='email'
 						name='email'
 						value={form.email}
-						placeholder={'Email'}
+						placeholder='Email'
 						onChange={handleChange}
 					/>
 					<FormInput
 						type='password'
 						name='password'
 						value={form.password}
-						placeholder={'Password'}
+						placeholder='Password'
 						onChange={handleChange}
 					/>
 					<Button type='submit'>Sign in</Button>

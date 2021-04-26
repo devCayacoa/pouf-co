@@ -12,10 +12,10 @@ export const AdminConsole = () => {
 	return (
 		<div className='' id='admin-console'>
 			{displayName}
-			<Link to={url + '/products'}>Products</Link>
+			<Link to={`${url}/products`}>Products</Link>
 			<Switch>
-				<Route path={url + '/products'} component={AdminProducts} />
-				<Route path={url + '/add-new'} component={AddNewProduct} />
+				<Route path={`${url}/products`} component={AdminProducts} />
+				<Route path={`${url}/add-new`} component={AddNewProduct} />
 			</Switch>
 		</div>
 	);

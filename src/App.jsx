@@ -19,6 +19,7 @@ import { AdminToolbar } from './components/AdminToolbar';
 import { Search } from './pages/Search';
 import { ProductDetails } from './pages/ProductDetails';
 import { Cart } from './pages/Cart';
+import { Payment } from './pages/Payment';
 
 const App = () => {
 	const dispatch = useDispatch();
@@ -33,8 +34,8 @@ const App = () => {
 			<Header />
 			<main className=''>
 				<Switch>
-					<Route exact path={'/'} component={Home} />
-					<Route path={'/login'} render={() => <Login />} />
+					<Route exact path='/' component={Home} />
+					<Route path='/login' render={() => <Login />} />
 					<Route path='/registration' render={() => <Registration />} />
 					<Route path='/recovery' component={Recovery} />
 					<Route
@@ -53,10 +54,18 @@ const App = () => {
 							</WithAdminAuth>
 						)}
 					/>
-					<Route exact path={'/search'} component={Search} />{' '}
-					<Route exact path={'/search/:filterType'} component={Search} />{' '}
-					<Route path={'/product/:productId'} component={ProductDetails} />
+					<Route exact path='/search' component={Search} />{' '}
+					<Route exact path='/search/:filterType' component={Search} />{' '}
+					<Route path='/product/:productId' component={ProductDetails} />
 					<Route path='/cart' component={Cart} />
+					<Route
+						path='/payment'
+						render={() => (
+							<WithAuth>
+								<Payment />
+							</WithAuth>
+						)}
+					/>
 				</Switch>
 			</main>
 			{/* <Footer /> */}
