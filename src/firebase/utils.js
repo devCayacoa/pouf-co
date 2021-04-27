@@ -3,7 +3,6 @@ import 'firebase/firestore';
 import 'firebase/auth';
 
 import { firebaseConfig } from './config';
-import { userTypes } from '../redux/User/user.types';
 
 firebase.initializeApp(firebaseConfig);
 

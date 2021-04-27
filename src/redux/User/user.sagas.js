@@ -41,7 +41,6 @@ export function* onEmailSignInStart() {
 }
 
 export function* isUserAuthenticated() {
-	console.log('Checking user auth');
 	try {
 		const userAuth = yield getCurrentUser();
 		if (!userAuth) return;
