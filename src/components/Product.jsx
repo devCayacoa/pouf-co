@@ -5,8 +5,8 @@ import { AddToCart } from './AddToCart';
 
 export const Product = ({ product }) => (
 	<div className='p-4'>
-		<Link to={`/product/${product.uid}`}>
-			<img src={product.thumbnail[0]} alt='' className='' />
+		<Link to={`/product/${product.id}`}>
+			<img src={product.thumbnails[0]} alt='' className='' />
 		</Link>
 		<Link to={`/product/${product.uid}`}>
 			<h3 className='font-bold text-md ml-1 mt-2'>{product.name}</h3>

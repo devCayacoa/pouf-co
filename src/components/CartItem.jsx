@@ -11,7 +11,7 @@ import {
 } from '../redux/Cart/cart.actions';
 
 export const CartItem = ({ item }) => {
-	const { price, uid, name, tags, quantity, thumbnail } = item;
+	const { price, uid, name, tags, quantity, thumbnails } = item;
 	const dispatch = useDispatch();
 
 	const btnStyles = 'font-bold text-md text-green-700 w-4';
@@ -19,7 +19,7 @@ export const CartItem = ({ item }) => {
 	return (
 		<div className='p-2' id=''>
 			<div id='' className='flex items-center'>
-				<img src={thumbnail[0]} className='w-16' alt='' srcSet='' />
+				<img src={thumbnails[0]} className='w-16' alt='' srcSet='' />
 				<div className='ml-2' id=''>
 					<p className=''>{name}</p>
 					<p className=''>${numberWithCommas(price)}</p>

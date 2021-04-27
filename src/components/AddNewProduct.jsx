@@ -15,7 +15,7 @@ export const AddNewProduct = () => {
 	const history = useHistory();
 	const [category, setProductCategory] = useState('men');
 	const [name, setName] = useState('');
-	const [thumbnail, setThumbnail] = useState('');
+	const [thumbnails, setThumbnail] = useState('');
 	const [tags, setTags] = useState('');
 	const [price, setPrice] = useState(0);
 	const [description, setDescription] = useState('');
@@ -31,7 +31,7 @@ export const AddNewProduct = () => {
 		dispatch(
 			addNewProductStart({
 				name: name.trim(),
-				thumbnail: thumbnail.split('\n').map((elem) => elem.trim()),
+				thumbnails: thumbnails.split('\n').map((elem) => elem.trim()),
 				price: parseFloat(price),
 				category: category.trim(),
 				tags: tags.split(',').map((elem) => elem.trim()),
@@ -54,7 +54,7 @@ export const AddNewProduct = () => {
 					]}
 					defaultValue={category}
 					onChange={(e) => setProductCategory(e.target.value)}
-					value={thumbnail}
+					value={thumbnails}
 					required
 				/>
 				<FormInput
@@ -71,7 +71,7 @@ export const AddNewProduct = () => {
 					name='thumbnails'
 					placeholder='Insert the links separated by an end of line...'
 					rows={5}
-					value={thumbnail}
+					value={thumbnails}
 					onChange={(e) => setThumbnail(e.target.value)}
 					required
 				/>

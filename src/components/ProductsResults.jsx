@@ -64,11 +64,11 @@ export const ProductResults = ({}) => {
 					className='grid border-t-2 border-gray-200 grid-cols-2'
 				>
 					{data.map((product) => {
-						if (!product.name || !product.thumbnail) {
+						if (!product.name || !product.thumbnails) {
 							return null;
 						}
 
-						return <Product key={product.uid} product={product} />;
+						return <Product key={product.id} product={product} />;
 					})}
 				</div>
 			)}

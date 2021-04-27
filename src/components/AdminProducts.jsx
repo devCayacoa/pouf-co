@@ -46,18 +46,18 @@ export const AdminProducts = () => {
 								<tbody>
 									{data &&
 										data.map((product, index) => {
-											const { uid, name, thumbnail, price, category } = product;
+											const { id, name, thumbnails, price, category } = product;
 											return (
 												<tr key={index} className='border-2 '>
 													<td className='border-2'>
-														<img src={thumbnail[0]} alt='' />
+														<img src={thumbnails[0]} alt='' />
 													</td>
 													<td>{name}</td>
 													<td>${price}</td>
 													<td>{category}</td>
 													<td>
 														<button
-															onClick={() => dispatch(deleteProductStart(uid))}
+															onClick={() => dispatch(deleteProductStart(id))}
 														>
 															Delete
 														</button>

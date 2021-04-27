@@ -1,25 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import {
-	CardCvcElement,
-	CardElement,
-	CardExpiryElement,
-	CardNumberElement,
-	PaymentRequestButtonElement,
-	useElements,
-	useStripe,
-} from '@stripe/react-stripe-js';
+import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { CountryDropdown } from 'react-country-region-selector';
 import { useDispatch, useSelector } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import {
+	selectCartItems,
 	selectCartItemsCount,
 	selectCartTotal,
 } from '../redux/Cart/cart.selectors';
 import { apiInstance } from '../utils';
 import { Button } from './forms/Button';
 import { FormInput } from './forms/FormInput';
-import { clearCart } from '../redux/Cart/cart.actions';
 import { useHistory } from 'react-router';
+import { saveOrderHistoryStart } from '../redux/Orders/orders.actions';
 
 // const initialAddress = {
 // 	line1: '',
@@ -42,6 +35,7 @@ const initialAddress = {
 const mapState = createStructuredSelector({
 	total: selectCartTotal,
 	itemCount: selectCartItemsCount,
+	cartItems: selectCartItems,
 });
 
 export const PaymentDetails = () => {
@@ -50,7 +44,7 @@ export const PaymentDetails = () => {
 	const stripe = useStripe();
 	const elements = useElements();
 
-	const { total, itemCount } = useSelector(mapState);
+	const { total, itemCount, cartItems } = useSelector(mapState);
 	const dispatch = useDispatch();
 
 	const [billing, setBilling] = useState({ ...initialAddress });
@@ -59,7 +53,7 @@ export const PaymentDetails = () => {
 	const [recipientName, setRecipientName] = useState('Example');
 
 	useEffect(() => {
-		if (itemCount < 1) history.push('/');
+		if (itemCount < 1) history.push('/dashboard');
 	}, [itemCount, history]);
 
 	const handleSubmit = async (e) => {
@@ -107,7 +101,21 @@ export const PaymentDetails = () => {
 						}
 					);
 					console.log('Payment intent: ', paymentIntent);
-					dispatch(clearCart());
+					const configOrder = {
+						total: parseFloat(total),
+						items: cartItems.map(
+							({ id, thumbnails, name, price, quantity }) => ({
+								id,
+								name,
+								price,
+								quantity,
+								thumbnails,
+							})
+						),
+						shipping: paymentIntent.shipping,
+					};
+					dispatch(saveOrderHistoryStart(configOrder));
+					// dispatch(clearCart());
 				} catch (error) {
 					console.log(error.message);
 				}
@@ -275,7 +283,7 @@ export const PaymentDetails = () => {
 					<h2 className=''>Card Details</h2>
 					<CardElement
 						className={'p-2 my-4'}
-						config={{ ...configCardElement }}
+						options={{ ...configCardElement }}
 					/>
 				</div>
 				<Button

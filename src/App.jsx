@@ -20,6 +20,7 @@ import { Search } from './pages/Search';
 import { ProductDetails } from './pages/ProductDetails';
 import { Cart } from './pages/Cart';
 import { Payment } from './pages/Payment';
+import { OrderDetails } from './components/OrderDetails';
 
 const App = () => {
 	const dispatch = useDispatch();
@@ -63,6 +64,14 @@ const App = () => {
 						render={() => (
 							<WithAuth>
 								<Payment />
+							</WithAuth>
+						)}
+					/>
+					<Route
+						path='/order/:orderId'
+						render={() => (
+							<WithAuth>
+								<OrderDetails />
 							</WithAuth>
 						)}
 					/>

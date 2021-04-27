@@ -1,12 +1,12 @@
 export const existingCartItem = ({ prevCartItems, nextCartItem }) =>
-	prevCartItems.find((cartItem) => cartItem.uid === nextCartItem.uid);
+	prevCartItems.find((cartItem) => cartItem.id === nextCartItem.id);
 
 export const handleAddToCart = ({ prevCartItems, nextCartItem }) => {
 	const quantityIncrement = 1;
 	const cartItemExists = existingCartItem({ prevCartItems, nextCartItem });
 	if (cartItemExists) {
 		return prevCartItems.map((item) =>
-			item.uid === nextCartItem.uid
+			item.id === nextCartItem.id
 				? {
 						...item,
 						quantity: item.quantity + quantityIncrement,
@@ -24,18 +24,18 @@ export const handleAddToCart = ({ prevCartItems, nextCartItem }) => {
 };
 
 export const handleDeleteFromCart = (prevCartItems, cartItemToDelete) =>
-	prevCartItems.filter((item) => item.uid !== cartItemToDelete.uid);
+	prevCartItems.filter((item) => item.id !== cartItemToDelete.id);
 
 export const handleDecrementCartItem = (prevCartItems, cartItemToDecrement) => {
 	const existingCartItem = prevCartItems.find(
-		(item) => item.uid === cartItemToDecrement.uid
+		(item) => item.id === cartItemToDecrement.id
 	);
 	if (existingCartItem.quantity === 1) {
-		return prevCartItems.filter((item) => item.uid !== cartItemToDecrement.uid);
+		return prevCartItems.filter((item) => item.id !== cartItemToDecrement.id);
 	}
 
 	return prevCartItems.map((item) =>
-		item.uid === existingCartItem.uid
+		item.id === existingCartItem.id
 			? {
 					...item,
 					quantity: item.quantity - 1,
