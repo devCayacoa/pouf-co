@@ -1,12 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Hero } from '../components/Hero';
+import { SpecialCard } from '../components/SpecialCard';
+import { WhatsNew } from '../components/WhatsNew';
 
 export const Home = () => (
-	<main id='home-page' className='p-4'>
-		<Link to='/search'>
-			<h1 className='text-xl font-bold text-white p-2 inline-block bg-black rounded'>
-				Products
-			</h1>
-		</Link>
+	<main id='home-page' className=''>
+		<Hero />
+		<WhatsNew />
+		<SpecialCard />
 	</main>
 );
