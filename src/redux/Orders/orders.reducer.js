@@ -1,6 +1,9 @@
 import { SET_ORDER_DETAILS, SET_USER_ORDER_HISTORY } from './orders.types';
 
-const initialState = { orderHistory: [], orderDetails: {} };
+const initialState = {
+	orderHistory: { data: [], startAfterDoc: {}, isLastPage: false },
+	orderDetails: {},
+};
 const ordersReducer = (state = initialState, { type, payload }) => {
 	switch (type) {
 		case SET_USER_ORDER_HISTORY:

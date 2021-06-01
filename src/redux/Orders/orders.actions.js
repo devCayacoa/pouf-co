@@ -11,9 +11,14 @@ export const saveOrderHistoryStart = (order) => ({
 	payload: order,
 });
 
-export const getUserOrderHistoryStart = (uid) => ({
+export const getUserOrderHistoryStart = ({
+	uid,
+	status = '',
+	persistOrders = [],
+	startAfterDoc,
+}) => ({
 	type: GET_USER_ORDER_HISTORY_START,
-	payload: uid,
+	payload: { uid, status, persistOrders, startAfterDoc },
 });
 
 export const setUserOrderHistory = (history) => ({

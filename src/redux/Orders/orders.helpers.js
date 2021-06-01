@@ -5,26 +5,50 @@ export const handleSaveOrder = (order) =>
 		firestore
 			.collection('orders')
 			.doc()
-			.set(order)
+			.set({ status: 'processing', ...order })
 			.then(() => {
 				resolve();
 			})
 			.catch((err) => reject(err));
 	});
 
-export const handleGetUserOrderHistory = (uid) =>
+export const handleGetUserOrderHistory = ({
+	uid,
+	status = '',
+	startAfterDoc,
+	persistOrders = [],
+}) =>
 	new Promise((resolve, reject) => {
-		let ref = firestore.collection('orders').orderBy('orderCreatedDate');
+		const pageSize = 6;
+		let ref = firestore
+			.collection('orders')
+			.orderBy('orderCreatedDate')
+			.limit(pageSize);
 		ref = ref.where('orderUserId', '==', uid);
+
+		if (status !== 'all') ref = ref.where('status', '==', status);
+
+		if (startAfterDoc) {
+			console.log('Starting after doc: ', startAfterDoc);
+			ref = ref.startAfter(startAfterDoc);
+		}
 		ref
 			.get()
 			.then((snapshot) => {
+				console.log('Snapshot: ', snapshot);
+				const totalCount = snapshot.size;
+
 				const data = [
+					...persistOrders,
 					...snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })),
 				];
-				return { data };
+
+				resolve({
+					data,
+					queryDoc: snapshot.docs[totalCount - 1],
+					isLastPage: totalCount < 1 || totalCount < pageSize,
+				});
 			})
-			.then((history) => resolve(history))
 			.catch((err) => reject(err));
 	});
 

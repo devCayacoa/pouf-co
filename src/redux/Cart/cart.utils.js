@@ -1,17 +1,20 @@
 export const existingCartItem = ({ prevCartItems, nextCartItem }) =>
-	prevCartItems.find((cartItem) => cartItem.id === nextCartItem.id);
+	prevCartItems.find(
+		(cartItem) =>
+			cartItem.id === nextCartItem.id && cartItem.color === nextCartItem.color
+	);
 
 export const handleAddToCart = ({ prevCartItems, nextCartItem }) => {
 	const quantityIncrement = 1;
 	const cartItemExists = existingCartItem({ prevCartItems, nextCartItem });
 	if (cartItemExists) {
-		return prevCartItems.map((item) =>
-			item.id === nextCartItem.id
+		return prevCartItems.map((cartItem) =>
+			cartItem.id === nextCartItem.id && cartItem.color === nextCartItem.color
 				? {
-						...item,
-						quantity: item.quantity + quantityIncrement,
+						...cartItem,
+						quantity: cartItem.quantity + quantityIncrement,
 				  }
-				: item
+				: cartItem
 		);
 	}
 	return [
