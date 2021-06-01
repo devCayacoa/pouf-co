@@ -3,8 +3,12 @@ import {
 	DELETE_PRODUCT_START,
 	FETCH_PRODUCTS_START,
 	FETCH_PRODUCT_START,
+	SET_EDITED_PRODUCT,
+	SET_LOCAL_PRODUCT,
 	SET_PRODUCT,
 	SET_PRODUCTS,
+	UPDATE_FORM_STATE,
+	UPDATE_PRODUCT_START,
 } from './products.types';
 
 export const addNewProductStart = (productDataFromForm) => ({
@@ -12,9 +16,13 @@ export const addNewProductStart = (productDataFromForm) => ({
 	payload: productDataFromForm,
 });
 
-export const fetchProductsStart = (filters = {}) => ({
+export const fetchProductsStart = ({
+	filter = '',
+	startAfterDoc,
+	persistProducts = [],
+}) => ({
 	type: FETCH_PRODUCTS_START,
-	payload: filters,
+	payload: { filter, startAfterDoc, persistProducts },
 });
 
 export const setProducts = (productsFromFirestore) => ({
@@ -32,7 +40,22 @@ export const fetchProductStart = (idOfProductToFetch) => ({
 	payload: idOfProductToFetch,
 });
 
-export const setProduct = (productsFromFirestore) => ({
+export const setProduct = (productFromFirestore) => ({
 	type: SET_PRODUCT,
-	payload: productsFromFirestore,
+	payload: productFromFirestore,
+});
+
+export const updateProductStart = (product) => ({
+	type: UPDATE_PRODUCT_START,
+	payload: product,
+});
+
+export const updateFormState = (formState) => ({
+	type: UPDATE_FORM_STATE,
+	payload: formState,
+});
+
+export const setEditedProduct = (editedProduct) => ({
+	type: SET_EDITED_PRODUCT,
+	payload: editedProduct,
 });

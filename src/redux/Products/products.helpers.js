@@ -5,7 +5,7 @@ export const handleAddProduct = (product) =>
 		firestore
 			.collection('products')
 			.doc()
-			.set(product)
+			.set({ ...product, rating: 0, numberRatings: 0 })
 			.then(() => resolve())
 			.catch((err) => reject(err));
 	});
@@ -21,7 +21,8 @@ export const handleFetchProducts = ({
 			.collection('products')
 			.orderBy('createdDate')
 			.limit(pageSize);
-		if (filterType) ref = ref.where('category', '==', filterType);
+
+		if (filterType) ref = ref.where('categories', 'array-contains', filterType);
 		if (startAfterDoc) ref = ref.startAfter(startAfterDoc);
 		ref
 			.get()
@@ -38,7 +39,10 @@ export const handleFetchProducts = ({
 					isLastPage: totalCount < 1 || totalCount < pageSize,
 				});
 			})
-			.catch((err) => reject(err));
+			.catch((err) => {
+				console.log(err);
+				reject(err);
+			});
 	});
 
 export const handleDeleteProduct = (uid) =>
@@ -58,7 +62,21 @@ export const handleFetchProduct = (id) =>
 			.doc(id)
 			.get()
 			.then((snapshot) => {
-				if (snapshot.exists) resolve(snapshot.data());
+				if (snapshot.exists) resolve({ id: snapshot.id, ...snapshot.data() });
 			})
 			.catch((err) => reject(err));
+	});
+
+export const handleUpdateProduct = (product) =>
+	new Promise((resolve, reject) => {
+		console.log('Product from handleUpdateProduct: ', product);
+		firestore
+			.collection('products')
+			.doc(product.id)
+			.update(product)
+			.then(() => resolve())
+			.catch((err) => {
+				console.log(err);
+				reject(err);
+			});
 	});
