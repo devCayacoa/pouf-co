@@ -6,7 +6,7 @@
 	"extends": [
 		"react-app",
 		"prettier"
-		// ,"plugin:react/recommended"
+		//, "plugin:react/recommended"
 	],
 	"parserOptions": {
 		"ecmaFeatures": {
@@ -17,17 +17,6 @@
 	},
 	"plugins": ["react", "prettier"],
 	"rules": {
-		"prettier/prettier": [
-			"warn",
-			{
-				"printWidth": 80,
-				"trailingComma": "es5",
-				"semi": true,
-				"jsxSingleQuote": true,
-				"singleQuote": true,
-				"useTabs": true,
-				"endOfLine": "auto"
-			}
-		]
+		"prettier/prettier": ["warn"]
 	}
 }
