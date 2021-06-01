@@ -1,0 +1,90 @@
+.product-description {
+	@apply mt-2 transition-all duration-300;
+}
+
+.product-description > ul {
+	@apply list-disc pl-6;
+}
+
+svg.icon {
+	@apply ml-auto inline-block text-secondary w-6 transition duration-500;
+}
+
+.scrolling-wrapper {
+	@apply flex flex-nowrap overflow-x-auto;
+}
+
+.thumbnail {
+	height: 260px;
+	@apply object-contain w-full mt-2;
+}
+
+.color-btn {
+	@apply rounded-md w-7 h-7 first:ml-0 ml-2;
+}
+
+.product-details {
+	@apply p-4;
+}
+
+.product-name {
+	@apply font-bold text-lg;
+}
+
+.color-btn:active:hover:focus {
+	@apply outline-none ring-2 ring-brown;
+}
+
+.product-price {
+	@apply text-secondary text-lg font-semibold;
+}
+
+.add-to-cart {
+	@apply w-full bg-brown text-white font-bold py-1.5 rounded mt-4 text-sm;
+}
+
+.ratings {
+	@apply bg-tertiary p-3 text-brown;
+}
+
+.ratings-title {
+	@apply font-bold;
+}
+
+.stars-wrapper {
+	@apply flex items-end;
+}
+
+.stars-text {
+	@apply ml-1 font-semibold mt-2;
+}
+
+.ratings-number {
+	@apply font-semibold mt-2;
+}
+/** Accordion styles */
+
+button.active {
+	background: #63615c;
+	@apply text-white;
+}
+
+.accordion_text > dl > dt {
+	@apply mt-2;
+}
+
+.accordion_text > dl > dt:first-child {
+	@apply mt-0;
+}
+
+div.description > dl > dt {
+	@apply mt-4;
+}
+
+div.description > dl > dt:first-child {
+	@apply mt-0;
+}
+
+div.description > dl > dd {
+	@apply mt-1;
+}

@@ -1,4 +1,4 @@
 import React from 'react';
-import { ProductCard } from '../components/ProductCard';
+import ProductCard from '../components/ProductCard';
 
-export const ProductDetails = ({}) => <ProductCard />;
+export const ProductDetails = () => <ProductCard />;

@@ -3,17 +3,18 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useHistory } from 'react-router';
-
-import { AuthWrapper } from './AuthWrapper';
-
-import { ForgotPassword } from './ForgotPassword';
-import { Button } from './forms/Button';
-import { FormInput } from './forms/FormInput';
+import { FormInput } from '../forms/FormInput';
 
 import {
 	emailSignInStart,
 	googleSignInStart,
-} from '../redux/User/user.actions';
+	userError,
+} from '../../redux/User/user.actions';
+import AuthWrapper from '../AuthWrapper';
+
+import { Link } from 'react-router-dom';
+
+import './SignIn.styles.css';
 
 const initialState = {
 	email: '',
@@ -23,7 +24,7 @@ const initialState = {
 
 const mapState = ({ user }) => ({ currentUser: user.currentUser });
 
-export const SignIn = () => {
+const SignIn = () => {
 	const [form, setForm] = useState(initialState);
 
 	const history = useHistory();
@@ -49,8 +50,10 @@ export const SignIn = () => {
 			setForm(initialState);
 			history.push('/');
 		}
-		return () => {};
-	}, [currentUser]);
+		return () => {
+			dispatch(userError(''));
+		};
+	}, [currentUser, history]);
 
 	return (
 		<div className='signin'>
@@ -59,26 +62,41 @@ export const SignIn = () => {
 					{form.errors.length > 0 &&
 						form.errors.map((elem, pos) => <li key={pos}>{elem}</li>)}
 				</ul>
-				<form action='' onSubmit={handleSubmit}>
+				<form className='sign-in-form' action='' onSubmit={handleSubmit}>
 					<FormInput
 						type='email'
 						name='email'
 						value={form.email}
 						placeholder='Email'
-						onChange={handleChange}
+						handleChange={handleChange}
+						className='input'
 					/>
 					<FormInput
 						type='password'
 						name='password'
 						value={form.password}
 						placeholder='Password'
-						onChange={handleChange}
+						handleChange={handleChange}
+						className='input'
 					/>
-					<Button type='submit'>Sign in</Button>
+					<div className='btn-wrapper'>
+						<button className='btn' type='submit'>
+							Sign in
+						</button>
+						<button className='btn google-btn' onClick={handleGoogleSignIn}>
+							Sign in with Google
+						</button>
+					</div>
 				</form>
-				<Button onClick={handleGoogleSignIn}>Sign in with Google</Button>
-				<ForgotPassword />
+				<Link to='/recovery' className='link'>
+					<h3 className='underline'>Forgot password?</h3>
+				</Link>
+				<Link to='/registration' className='link'>
+					<h3 className='underline'>Create an account</h3>
+				</Link>
 			</AuthWrapper>
 		</div>
 	);
 };
+
+export default SignIn;
