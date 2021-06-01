@@ -5,14 +5,24 @@ import {
 	GoogleProvider,
 	handleUserProfile,
 } from '../../firebase/utils';
+import { setLoading } from '../UI/UI.actions';
+
 import {
 	resetPasswordSuccess,
 	signInSuccess,
 	signOutUserSuccess,
 	userError,
 } from './user.actions';
+
 import { handleResetPasswordAPI } from './user.helpers';
-import { userTypes } from './user.types';
+import {
+	CHECK_USER_SESSION,
+	EMAIL_SIGN_IN_START,
+	GOOGLE_SIGN_IN_START,
+	RESET_PASSWORD_START,
+	SIGN_OUT_USER_START,
+	SIGN_UP_USER_START,
+} from './user.types';
 
 export function* getSnapshotFromUserAuth(user, additionalData = {}) {
 	try {
@@ -37,34 +47,37 @@ export function* emailSignIn({ payload: { email, password } }) {
 }
 
 export function* onEmailSignInStart() {
-	yield takeLatest(userTypes.EMAIL_SIGN_IN_START, emailSignIn);
+	yield takeLatest(EMAIL_SIGN_IN_START, emailSignIn);
 }
 
 export function* isUserAuthenticated() {
+	yield put(setLoading(true));
 	try {
 		const userAuth = yield getCurrentUser();
-		if (!userAuth) return;
-		yield getSnapshotFromUserAuth(userAuth);
+		if (userAuth) yield getSnapshotFromUserAuth(userAuth);
+		yield put(setLoading(false));
 	} catch (error) {
 		// console.log(error.message)
 	}
 }
 
 export function* onCheckUserSession() {
-	yield takeLatest(userTypes.CHECK_USER_SESSION, isUserAuthenticated);
+	yield takeLatest(CHECK_USER_SESSION, isUserAuthenticated);
 }
 
 export function* signOutUser() {
+	// yield put(setLoading(true));
 	try {
 		yield auth.signOut();
 		yield put(signOutUserSuccess());
+		// yield put(setLoading(false));
 	} catch (error) {
 		// console.log(error.message)
 	}
 }
 
 export function* onSignOutUserStart() {
-	yield takeLatest(userTypes.SIGN_OUT_USER_START, signOutUser);
+	yield takeLatest(SIGN_OUT_USER_START, signOutUser);
 }
 
 export function* signUpUser({
@@ -85,7 +98,7 @@ export function* signUpUser({
 }
 
 export function* onSignUpUserStart() {
-	yield takeLatest(userTypes.SIGN_UP_USER_START, signUpUser);
+	yield takeLatest(SIGN_UP_USER_START, signUpUser);
 }
 
 export function* resetPassword({ payload: { email } }) {
@@ -99,7 +112,7 @@ export function* resetPassword({ payload: { email } }) {
 }
 
 export function* onResetPasswordStart() {
-	yield takeLatest(userTypes.RESET_PASSWORD_START, resetPassword);
+	yield takeLatest(RESET_PASSWORD_START, resetPassword);
 }
 
 export function* googleSignIn() {
@@ -111,7 +124,7 @@ export function* googleSignIn() {
 	}
 }
 export function* onGoogleSignInStart() {
-	yield takeLatest(userTypes.GOOGLE_SIGN_IN_START, googleSignIn);
+	yield takeLatest(GOOGLE_SIGN_IN_START, googleSignIn);
 }
 
 export default function* userSagas() {

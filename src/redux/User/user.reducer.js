@@ -1,4 +1,10 @@
-const { userTypes } = require('./user.types');
+const {
+	RESET_PASSWORD_SUCCESS,
+	USER_ERROR,
+	SIGN_OUT_USER_SUCCESS,
+	RESET_USER_STATE,
+	SIGN_IN_SUCCESS,
+} = require('./user.types');
 
 const INITIAL_STATE = {
 	currentUser: null,
@@ -7,16 +13,6 @@ const INITIAL_STATE = {
 };
 
 export const userReducer = (state = INITIAL_STATE, { type, payload }) => {
-	const {
-		SET_CURRENT_USER,
-		CLEAR_CURRENT_USER,
-		SIGN_IN_SUCCESS,
-		SIGN_OUT_USER_SUCCESS,
-		USER_ERROR,
-		RESET_PASSWORD_SUCCESS,
-		RESET_USER_STATE,
-	} = userTypes;
-
 	switch (type) {
 		case SIGN_IN_SUCCESS:
 			return { ...state, currentUser: payload, userErr: [] };
