@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router';
 import { fetchProductsStart } from '../redux/Products/products.actions';
+import { categoriesValues } from '../utils';
+import SearchWithAlgolia from './SearchWithAlgolia';
 import Select from './forms/Select';
 import { LoadMore } from './LoadMore';
 import { Product } from './Product';
@@ -10,7 +12,7 @@ const mapState = ({ productsData }) => ({
 	products: productsData.products,
 });
 
-export const ProductResults = ({}) => {
+export const ProductResults = () => {
 	const history = useHistory();
 	const { filterType } = useParams();
 	const dispatch = useDispatch();
@@ -20,7 +22,7 @@ export const ProductResults = ({}) => {
 
 	useEffect(() => {
 		dispatch(fetchProductsStart({ filterType }));
-	}, [filterType]);
+	}, [filterType, dispatch]);
 	if (!Array.isArray(data)) return null;
 
 	const handleFilter = (e) => {
@@ -29,11 +31,9 @@ export const ProductResults = ({}) => {
 	};
 
 	const configFilter = {
-		defaultValue: filterType,
+		defaultValue: filterType ? filterType : '',
 		options: [
-			{ name: 'Show all', value: '' },
-			{ name: 'Mens', value: 'mens' },
-			{ name: 'Womens', value: 'womens' },
+			...Object.keys(categoriesValues).map((key) => categoriesValues[key]),
 		],
 		handleChange: handleFilter,
 	};
@@ -51,28 +51,26 @@ export const ProductResults = ({}) => {
 	const configLoadMore = {
 		handleLoadMore,
 	};
+
 	return (
 		<div id='products-container' className='mt-2'>
-			<h1 className=''>Browse products</h1>
-			<Select {...configFilter} />
+			<h1 className=''>Browse poufs</h1>
+			<SearchWithAlgolia />
+
+			{/* <Select {...configFilter} />
 			<h5 className='ml-4 mb-2 text-sm text-gray-700'>{data.length} items</h5>
 			{data.length < 1 ? (
 				<p className=''>No search results.</p>
 			) : (
-				<div
-					id='products-grid'
-					className='grid border-t-2 border-gray-200 grid-cols-2'
-				>
+				<div id='products-grid' className='border-t-2 border-gray-200'>
 					{data.map((product) => {
-						if (!product.name || !product.thumbnails) {
-							return null;
-						}
-
-						return <Product key={product.id} product={product} />;
+						return !product.name ? null : (
+							<Product key={product.id} product={product} />
+						);
 					})}
 				</div>
 			)}
-			{!isLastPage && <LoadMore {...configLoadMore} />}
+			{!isLastPage && <LoadMore {...configLoadMore} />} */}
 		</div>
 	);
 };

@@ -34,7 +34,7 @@ export const Navbar = () => {
 
 	return (
 		<nav
-			className='flex justify-between items-center w-full shadow-xl'
+			className='flex justify-between items-center w-full shadow-xl z-50'
 			id='navbar'
 		>
 			<div className='flex items-center'>

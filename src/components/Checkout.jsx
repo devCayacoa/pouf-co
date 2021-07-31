@@ -8,7 +8,7 @@ import {
 	selectCartTotal,
 } from '../redux/Cart/cart.selectors';
 import { numberWithCommas } from '../utils';
-import { CartItem } from './CartItem';
+import CartItem from './CartItem';
 import { Button } from './forms/Button';
 
 const mapState = createStructuredSelector({
@@ -21,36 +21,45 @@ export const Checkout = ({}) => {
 	const { cartItems, itemsTotal, itemsCount } = useSelector(mapState);
 
 	return (
-		<div className=''>
-			<h1 className='text-xl font-bold'>Checkout</h1>
-			{itemsCount > 0 && (
-				<div className='flex'>
-					<h3 id='' className=''>
-						{itemsCount} item(s)
-					</h3>
-					<h3 id='' className='ml-2'>
-						${numberWithCommas(itemsTotal)}
-					</h3>
-				</div>
-			)}
-			<div id='' className='flex flex-col'>
+		<div className='p-4'>
+			<h1 className='text-lg font-bold'>Shopping bag</h1>
+			<div className='text-sm flex items-center mt-2'>
+				<div className='rounded-full w-2 h-2 bg-blue-400 mr-1'></div> Waiting
+				for payment
+			</div>
+			<div
+				id=''
+				className='scrolling-wrapper flex flex-nowrap overflow-x-auto font-semibold whitespace-nowrap mt-8 pl-4 pb-3.5'
+			>
+				{Array.isArray(cartItems) &&
+					cartItems.length > 0 &&
+					cartItems.map(({ id, thumbnails }) => (
+						<img
+							className='w-32 h-32 mr-4 object-contain'
+							src={thumbnails[0]}
+							onClick={() => history.push(`/product/${id}`)}
+							alt='product'
+						/>
+					))}
+			</div>
+			{/* <div id='' className='flex flex-col'>
 				{cartItems.length > 0 ? (
 					cartItems.map((item, index) => <CartItem key={index} item={item} />)
 				) : (
 					<h2 className=''>Add some items to your cart...</h2>
 				)}
-			</div>
+			</div> */}
+			{itemsCount > 0 && (
+				<h3 id='' className='text-right'>
+					{itemsCount} item(s) total:
+					<span className='font-bold'> ${numberWithCommas(itemsTotal)}</span>
+				</h3>
+			)}
 			<Button
-				className='border border-gray-600'
-				onClick={() => history.goBack()}
-			>
-				Continue shopping
-			</Button>
-			<Button
-				className='ml-2 border border-gray-600'
+				className='btn w-20 whitespace-nowrap py-1 ml-auto'
 				onClick={() => history.push('/payment')}
 			>
-				Checkout
+				Pay now
 			</Button>
 		</div>
 	);

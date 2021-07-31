@@ -2,9 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 
-import { resetPasswordStart, resetUserState } from '../redux/User/user.actions';
+import {
+	resetPasswordStart,
+	resetUserState,
+	userError,
+} from '../redux/User/user.actions';
 
-import { AuthWrapper } from './AuthWrapper';
+import AuthWrapper from './AuthWrapper';
 import { Button } from './forms/Button';
 import { FormInput } from './forms/FormInput';
 
@@ -24,6 +28,7 @@ const EmailPassword = (props) => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		setErrors([]);
 		dispatch(resetPasswordStart({ email }));
 	};
 
@@ -33,6 +38,9 @@ const EmailPassword = (props) => {
 			dispatch(resetUserState());
 			history.push('/login');
 		}
+		return () => {
+			dispatch(userError(''));
+		};
 	}, [resetPasswordSuccess]);
 
 	useEffect(() => {
@@ -59,9 +67,12 @@ const EmailPassword = (props) => {
 						name='email'
 						value={email}
 						placeholder='Email'
+						className='input'
 						onChange={(e) => setEmail(e.target.value)}
 					/>
-					<Button type='submit'>Recover</Button>
+					<Button type='submit' className='btn'>
+						Recover
+					</Button>
 				</form>
 			</AuthWrapper>
 		</div>

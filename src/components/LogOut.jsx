@@ -6,8 +6,8 @@ export const LogOut = () => {
 	const dispatch = useDispatch();
 	const signOut = () => dispatch(signOutUserStart());
 	return (
-		<h1 className='ml-2' onClick={signOut}>
+		<button className='ml-2' onClick={signOut}>
 			Logout
-		</h1>
+		</button>
 	);
 };

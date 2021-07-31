@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Select = ({
 	options,
@@ -31,6 +32,18 @@ const Select = ({
 			</select>
 		</div>
 	);
+};
+
+Select.propTypes = {
+	options: PropTypes.arrayOf(
+		PropTypes.shape({
+			value: PropTypes.string.isRequired,
+			name: PropTypes.string.isRequired,
+		})
+	).isRequired,
+	defaultValue: PropTypes.string.isRequired,
+	handleChange: PropTypes.func.isRequired,
+	label: PropTypes.string,
 };
 
 export default Select;

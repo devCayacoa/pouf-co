@@ -7,3 +7,4 @@ export const NavbarIcon = ({ icon, link }) => (
 		<img src={icon} alt='' className='w-5' />
 	</Link>
 );
+

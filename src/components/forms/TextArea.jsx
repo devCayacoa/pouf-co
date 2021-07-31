@@ -1,23 +1,50 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export const TextArea = ({
+const TextArea = ({
 	children,
 	label,
 	handleChange,
 	rows,
 	cols,
+	name,
+	value,
+	inputClasses,
+	labelClasses,
 	...props
 }) => (
 	<div className='form-row'>
-		{label && <label htmlFor={props.name}>{label}</label>}
+		{label && (
+			<label htmlFor={name} className={labelClasses}>
+				{label}
+			</label>
+		)}
 		<textarea
-			className='form-textarea rounded text-black border-2 font-bold p-2 mt-2 w-full'
+			className={inputClasses}
 			onChange={handleChange}
 			rows={rows}
 			cols={cols}
+			value={value}
 			{...props}
 		>
 			{children}
 		</textarea>
 	</div>
 );
+
+TextArea.propTypes = {
+	children: PropTypes.oneOfType([
+		PropTypes.arrayOf(PropTypes.node),
+		PropTypes.node,
+	]),
+	label: PropTypes.string,
+	handleChange: PropTypes.func.isRequired,
+	value: PropTypes.string,
+	rows: PropTypes.number,
+	cols: PropTypes.number,
+	name: PropTypes.string,
+	inputClasses: PropTypes.string,
+	labelClasses: PropTypes.string,
+};
+
+export default TextArea;

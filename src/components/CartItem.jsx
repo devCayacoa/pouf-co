@@ -1,34 +1,44 @@
 import React from 'react';
-import { FaTrash } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import { Button } from './forms/Button';
 import { FormInput } from './forms/FormInput';
 import { numberWithCommas } from '../utils';
+
 import {
 	addProduct,
 	decrementCartItem,
 	deleteCartItem,
 } from '../redux/Cart/cart.actions';
 
-export const CartItem = ({ item }) => {
-	const { price, uid, name, tags, quantity, thumbnails } = item;
+import PropTypes from 'prop-types';
+
+import { TrashIcon } from '@heroicons/react/outline';
+import { Link } from 'react-router-dom';
+
+const CartItem = ({ item }) => {
+	const { price, id, name, tags, quantity, thumbnails } = item;
 	const dispatch = useDispatch();
 
 	const btnStyles = 'font-bold text-md text-green-700 w-4';
-
+return 
 	return (
 		<div className='p-2' id=''>
 			<div id='' className='flex items-center'>
-				<img src={thumbnails[0]} className='w-16' alt='' srcSet='' />
+				<Link to={`/product/${id}`}>
+					<img src={thumbnails[0]} className='w-16' alt='' srcSet='' />
+				</Link>
 				<div className='ml-2' id=''>
-					<p className=''>{name}</p>
-					<p className=''>${numberWithCommas(price)}</p>
+					<Link to={`/product/${id}`}>
+						<p className=''>{name}</p>
+						<p className=''>${numberWithCommas(price)}</p>
+					</Link>
 				</div>
+
 				<Button
 					className='ml-auto mr-2 text-red-500'
 					onClick={() => dispatch(deleteCartItem(item))}
 				>
-					<FaTrash />
+					<TrashIcon className='icon' />
 				</Button>
 			</div>
 			<div className='flex justify-between mt-2'>
@@ -61,3 +71,16 @@ export const CartItem = ({ item }) => {
 		</div>
 	);
 };
+
+CartItem.propTypes = {
+	item: PropTypes.shape({
+		price: PropTypes.number,
+		id: PropTypes.string,
+		name: PropTypes.string,
+		tags: PropTypes.arrayOf(PropTypes.string),
+		quantity: PropTypes.number,
+		thumbnails: PropTypes.arrayOf(PropTypes.string),
+	}).isRequired,
+};
+
+export default CartItem;

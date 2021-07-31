@@ -13,12 +13,20 @@ export const AdminToolbar = () => {
 	if (!isAdmin) return null;
 
 	return (
-		<div className='admin-toolbar bg-black text-white flex justify-end'>
-			<ul className=''>
-				<li className='p-2 transition duration-150 hover:bg-purple-600 text-white'>
-					<Link to='/admin'>My admin</Link>
-				</li>
-			</ul>
+		<div className='admin-toolbar text-white flex justify-between w-full h-9 items-center'>
+			<h1 className='p-2 font-bold text-white bg-brown text-sm w-full h-full'>
+				Welcome, {currentUser.displayName}!
+				{/* <span className='text-[9px]'>
+						<br />
+						ID: {currentUser.id}
+					</span> */}
+			</h1>
+			<Link
+				to='/admin'
+				className='transition duration-150 hover:bg-blue-600 bg-secondary text-white h-full whitespace-nowrap p-2'
+			>
+				My admin
+			</Link>
 		</div>
 	);
 };
