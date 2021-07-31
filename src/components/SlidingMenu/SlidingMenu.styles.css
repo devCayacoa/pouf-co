@@ -1,0 +1,51 @@
+.title {
+	@apply text-xl font-semibold text-brown;
+}
+
+.menu-content {
+	@apply text-brown px-4 sm:px-6;
+}
+
+.btn-wrapper {
+	@apply mt-3 w-full block;
+}
+
+.btn {
+	@apply p-2 block w-full bg-secondary text-white text-xs rounded-sm text-center font-semibold tracking-widest uppercase;
+}
+
+.btn + .btn {
+	@apply mt-1;
+}
+.cta {
+	@apply bg-brown;
+}
+
+.sign-out {
+}
+
+.content-wrapper {
+	@apply mt-6 relative flex-1 px-4 sm:px-6 w-full;
+}
+
+.content-box {
+	@apply absolute py-2 inset-0 px-4 sm:px-6 w-full flex flex-col;
+}
+
+.content-option {
+	@apply text-lg border-l-2 border-brown border-opacity-60 w-full pl-1 font-medium;
+}
+
+.content-option + .content-option {
+	@apply mt-3;
+}
+
+.accordion-content-ul {
+}
+
+.accordion-content-li {
+	@apply text-base;
+}
+.accordion-content-li + .accordion-content-li {
+	@apply mt-2;
+}

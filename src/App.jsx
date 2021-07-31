@@ -22,61 +22,77 @@ import { Cart } from './pages/Cart';
 import { Payment } from './pages/Payment';
 import { OrderDetails } from './components/OrderDetails';
 
+import './App.css';
+import SlidingMenu from './components/SlidingMenu';
+import WithLoading from './hoc/WithLoading';
+import { OrderHistory } from './components/OrderHistory';
+
 const App = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
 		dispatch(checkUserSession());
-	}, []);
+	}, [dispatch]);
 
 	return (
 		<div id='App' className='subpixel-antialiased w-screen'>
 			<AdminToolbar />
 			<Header />
-			<main className=''>
-				<Switch>
-					<Route exact path='/' component={Home} />
-					<Route path='/login' render={() => <Login />} />
-					<Route path='/registration' render={() => <Registration />} />
-					<Route path='/recovery' component={Recovery} />
-					<Route
-						path='/dashboard'
-						render={() => (
-							<WithAuth>
-								<Dashboard />
-							</WithAuth>
-						)}
-					/>
-					<Route
-						path='/admin'
-						render={() => (
-							<WithAdminAuth>
-								<Admin />
-							</WithAdminAuth>
-						)}
-					/>
-					<Route exact path='/search' component={Search} />{' '}
-					<Route exact path='/search/:filterType' component={Search} />{' '}
-					<Route path='/product/:productId' component={ProductDetails} />
-					<Route path='/cart' component={Cart} />
-					<Route
-						path='/payment'
-						render={() => (
-							<WithAuth>
-								<Payment />
-							</WithAuth>
-						)}
-					/>
-					<Route
-						path='/order/:orderId'
-						render={() => (
-							<WithAuth>
-								<OrderDetails />
-							</WithAuth>
-						)}
-					/>
-				</Switch>
-			</main>
+			<SlidingMenu />
+			<WithLoading>
+				<main className=''>
+					<Switch>
+						<Route exact path='/' component={Home} />
+						<Route path='/login' render={() => <Login />} />
+						<Route path='/registration' render={() => <Registration />} />
+						<Route path='/recovery' component={Recovery} />
+						<Route
+							path='/dashboard'
+							render={() => (
+								<WithAuth>
+									<Dashboard />
+								</WithAuth>
+							)}
+						/>
+						<Route
+							path='/admin'
+							render={() => (
+								<WithAdminAuth>
+									<Admin />
+								</WithAdminAuth>
+							)}
+						/>
+						<Route exact path='/search' component={Search} />{' '}
+						<Route exact path='/search/:filterType' component={Search} />{' '}
+						<Route path='/product/:productId' component={ProductDetails} />
+						<Route path='/cart' component={Cart} />
+						<Route
+							path='/payment'
+							render={() => (
+								<WithAuth>
+									<Payment />
+								</WithAuth>
+							)}
+						/>
+						<Route
+							path='/orders/:status'
+							render={() => (
+								<WithAuth>
+									<OrderHistory />
+								</WithAuth>
+							)}
+						/>
+						<Route
+							path='/order/:orderId'
+							render={() => (
+								<WithAuth>
+									<OrderDetails />
+								</WithAuth>
+							)}
+						/>
+					</Switch>
+				</main>
+			</WithLoading>
 			{/* <Footer /> */}
 		</div>
 	);
