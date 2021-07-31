@@ -1,0 +1,15 @@
+body {
+	@apply text-brown;
+}
+
+div#modal-root {
+	@apply z-50 fixed top-0 left-0;
+}
+
+.scrolling-wrapper {
+	-webkit-overflow-scrolling: touch;
+}
+
+.scrolling-wrapper::-webkit-scrollbar {
+	display: none;
+}

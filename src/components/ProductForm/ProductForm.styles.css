@@ -1,0 +1,58 @@
+.form-btn {
+	@apply bg-brown px-2.5 py-0.5 text-white rounded block my-3 text-sm font-bold;
+}
+
+btn + .form-btn {
+	@apply ml-3;
+}
+.delete-form-btn {
+	@apply bg-warn px-2.5 py-0.5 text-white rounded block my-3 text-sm font-bold;
+}
+.form- .form-input {
+	box-shadow: inset -3px 3px 7px 0 rgba(0, 0, 0, 0.2);
+	font-size: 18px;
+	background: #e9e9e9;
+	@apply text-secondary font-medium text-base w-full py-1 px-2 placeholder-opacity-50 rounded focus:outline-none active:outline-none focus:ring active:ring focus:ring-brown active:ring-brown transition duration-500;
+	/* @apply px-1 border-2 border-black text-xs text-sm w-full px-2 py-1; */
+}
+
+.label {
+	@apply font-bold block mt-2;
+}
+
+.title-label {
+	@apply text-lg;
+}
+
+.subtitle-label {
+	@apply mt-2 text-sm;
+}
+
+.smaller-label {
+	@apply text-xs;
+}
+
+div.tags-container {
+	@apply flex flex-wrap gap-y-2 gap-x-1 mt-2 justify-start;
+}
+
+div.tag {
+	background-color: rgba(65, 63, 60, 0.36);
+	@apply flex justify-center text-brown py-0.5 px-1.5 rounded;
+}
+
+p.tag-text {
+	@apply font-bold;
+}
+
+svg.tag-delete {
+	@apply ml-1 w-4 stroke-current stroke-2;
+}
+
+.tag-delete > path {
+	@apply stroke-3;
+}
+
+div.ck {
+	z-index: 10;
+}
